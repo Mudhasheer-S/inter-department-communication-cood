@@ -45,12 +45,12 @@ const Navbar = () => {
         <div className={`lg:flex lg:items-center lg:w-auto ${isOpen ? 'block' : 'hidden'}`}>
           <ul className="lg:flex lg:space-x-4">
             <li>
-              <Link to="/alldepartment" className="block px-4 py-2 text-gray-300 hover:bg-gray-700 rounded">
+              <Link to="/head/alldepartment" className="block px-4 py-2 text-gray-300 hover:bg-gray-700 rounded">
                 Home
               </Link>
             </li>
             <li>
-              <Link to="/alldepartment" className="block px-4 py-2 text-gray-300 hover:bg-gray-700 rounded">
+              <Link to="/head/alldepartment" className="block px-4 py-2 text-gray-300 hover:bg-gray-700 rounded">
                 All Departments
               </Link>
             </li>

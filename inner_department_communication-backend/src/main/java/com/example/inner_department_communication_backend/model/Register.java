@@ -21,7 +21,9 @@ public class Register {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String departmentName;
+    private String role;
     private String email;
+    private String location;
     private String password;
 
 }

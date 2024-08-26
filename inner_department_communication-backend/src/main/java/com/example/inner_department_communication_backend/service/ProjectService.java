@@ -33,7 +33,7 @@ public class ProjectService {
 
     //post
     public Project createProject(Project project, String departmentName) {
-        Register department = registerRepository.findByDepartmentName(departmentName);
+        Register department = registerRepository.findByDepartmentNameAndLocation(departmentName,project.getLocationName());
         if (department != null) {
             project.setDepartment(department);
 
@@ -84,8 +84,8 @@ public class ProjectService {
 
 
     //get
-    public List<ProjectDTO> getProjectsByDepartmentName(String departmentName) {
-        Register department = registerRepository.findByDepartmentName(departmentName);
+    public List<ProjectDTO> getProjectsByDepartmentName(String departmentName,String location) {
+        Register department = registerRepository.findByDepartmentNameAndLocation(departmentName,location);
         if (department != null) {
             List<Project> projects = projectRepository.findByDepartment(department);
             return projects.stream()

@@ -35,10 +35,10 @@ public class ProjectController {
         }
     }
 
- @GetMapping("get-project/by-department/{departmentName}")
+ @GetMapping("get-project/by-department/{departmentName}/{location}")
     public ResponseEntity<List<ProjectDTO>> getProjectsByDepartmentName(
-            @PathVariable String departmentName) {
-        List<ProjectDTO> projectDTOs = projectService.getProjectsByDepartmentName(departmentName);
+            @PathVariable String departmentName,@PathVariable String location) {
+        List<ProjectDTO> projectDTOs = projectService.getProjectsByDepartmentName(departmentName,location);
         if (projectDTOs.isEmpty()) {
             return ResponseEntity.noContent().build(); // 204 No Content if no projects found
         }

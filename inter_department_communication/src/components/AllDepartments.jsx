@@ -10,13 +10,14 @@ const AllDepartments = () => {
   
   const navigate = useNavigate();
   const departmentName = useSelector((state) => state.department.name);
+  const location = useSelector((state) => state.department.location);
 
   useEffect(() => {
     if (!departmentName) return;
 
     const fetchDepartments = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/departments-name/${departmentName}`);
+        const response = await axios.get(`http://localhost:8080/departments-name/${departmentName}/${location}`);
         setDepartmentNames(response.data);
       } catch (err) {
         console.error("Error fetching departments:", err);
@@ -60,7 +61,7 @@ const AllDepartments = () => {
           </div>
         </>
       ) : (
-        <DepartmentProjects departmentName={selectedDepartment} onBack={handleBack} />
+        <DepartmentProjects departmentName={selectedDepartment} location={location} onBack={handleBack} />
       )}
     </div>
   );

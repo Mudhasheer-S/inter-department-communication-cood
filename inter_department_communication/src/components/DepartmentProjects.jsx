@@ -5,7 +5,7 @@ import { SlCalender } from "react-icons/sl";
 import { PiClockCountdownFill } from "react-icons/pi";
 import { IoReturnUpBack } from "react-icons/io5";
 
-const DepartmentProjects = ({ departmentName, onBack }) => {
+const DepartmentProjects = ({ departmentName,location, onBack }) => {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -17,7 +17,7 @@ const DepartmentProjects = ({ departmentName, onBack }) => {
       setLoading(true);
       setError(null);
       try {
-        const response = await axios.get(`http://localhost:8080/get-project/by-department/${departmentName}`);
+        const response = await axios.get(`http://localhost:8080/get-project/by-department/${departmentName}/${location}`);
         setProjects(response.data);
       } catch (err) {
         console.error("Error fetching projects:", err);

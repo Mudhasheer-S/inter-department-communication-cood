@@ -60,7 +60,7 @@ function App() {
 
        
         <Route element={<MainLayout />}>
-          <Route path="/alldepartment" element={<AllDepartments />} />
+          <Route path="/head/alldepartment" element={<AllDepartments />} />
           <Route path="/notification" element={<Notification />} />
           <Route path="/mydepartment" element={<MyDepartment />} />
           <Route path="/post-project" element={<PostProjectForm />} />

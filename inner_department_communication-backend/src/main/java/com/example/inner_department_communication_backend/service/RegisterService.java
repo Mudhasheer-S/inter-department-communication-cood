@@ -30,7 +30,7 @@ public class RegisterService {
         if (optionalRegister.isPresent()) {
             Register register = optionalRegister.get();
             if (register.getPassword().equals(password)) {
-                return register.getDepartmentName();
+                return register.getDepartmentName()+"#"+register.getRole()+"#"+register.getLocation();
             }
         }
         return null;
@@ -40,7 +40,7 @@ public class RegisterService {
 
     //get
 
-    public List<String> getDepartmentNamesExcluding(String departmentName) {
-        return registerRepository.findDepartmentNamesExcluding(departmentName);
+    public List<String> getDepartmentNamesExcluding(String departmentName,String location) {
+        return registerRepository.findDepartmentNamesExcluding(departmentName,location);
     }
 }

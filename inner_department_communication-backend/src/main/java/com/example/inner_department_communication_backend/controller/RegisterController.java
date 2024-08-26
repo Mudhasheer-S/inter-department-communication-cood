@@ -34,18 +34,18 @@ public class RegisterController {
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody LoginRequestDTO loginRequest) {
-        String departmentName = registerService.loginAndGetDepartmentName(loginRequest.getEmail(), loginRequest.getPassword());
-        if (departmentName != null) {
-            return ResponseEntity.ok("Login successful. Department: " + departmentName);
+        String department = registerService.loginAndGetDepartmentName(loginRequest.getEmail(), loginRequest.getPassword());
+        if (department != null) {
+            return ResponseEntity.ok("Login successful. #" + department);
         } else {
             return ResponseEntity.status(401).body("Invalid credentials");
         }
     }
 
 
-     @GetMapping("/departments-name/{departmentName}")
-    public ResponseEntity<List<String>> getDepartmentNamesExcluding(@PathVariable String departmentName) {
-        List<String> departmentNames = registerService.getDepartmentNamesExcluding(departmentName);
+    @GetMapping("/departments-name/{departmentName}/{location}")
+    public ResponseEntity<List<String>> getDepartmentNamesExcluding(@PathVariable String departmentName,@PathVariable String location) {
+        List<String> departmentNames = registerService.getDepartmentNamesExcluding(departmentName,location);
 
         if (departmentNames.isEmpty()) {
             return ResponseEntity.noContent().build(); // 204 No Content if no departments found

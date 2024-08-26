@@ -59,6 +59,11 @@ const Navbar = () => {
                 My Department
               </Link>
             </li>
+            <li>
+              <Link to="/intersectDept" className="block px-4 py-2 text-gray-300 hover:bg-gray-700 rounded">
+                Overlapping Projects
+              </Link>
+            </li>
             <li
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}

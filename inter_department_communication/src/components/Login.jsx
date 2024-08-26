@@ -41,9 +41,7 @@ export default function Login() {
         const departmentName = response.data.split("#")[1].trim();
         const role = response.data.split("#")[2].trim();
         const location = response.data.split("#")[3].trim();
-        console.log(departmentName);
-        console.log(role);
-        console.log(location);
+        const departmentId = response.data.split("#")[4].trim();
         dispatch(setDepartmentName(departmentName));
         dispatch(setDepartmentLocation(location));
         dispatch(setDepartmentRole(role));

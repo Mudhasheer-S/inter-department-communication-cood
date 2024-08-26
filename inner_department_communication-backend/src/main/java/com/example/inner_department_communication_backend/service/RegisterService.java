@@ -30,7 +30,7 @@ public class RegisterService {
         if (optionalRegister.isPresent()) {
             Register register = optionalRegister.get();
             if (register.getPassword().equals(password)) {
-                return register.getDepartmentName()+"#"+register.getRole()+"#"+register.getLocation();
+                return register.getDepartmentName()+"#"+register.getRole()+"#"+register.getLocation()+"#"+register.getId();
             }
         }
         return null;

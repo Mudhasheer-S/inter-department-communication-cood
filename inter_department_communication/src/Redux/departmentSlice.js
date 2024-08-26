@@ -4,11 +4,15 @@ import { createSlice } from '@reduxjs/toolkit';
 export const departmentSlice = createSlice({
   name: 'department',
   initialState: {
+    id:'',
     name: '',
     location: '',
     role: '',
   },
   reducers: {
+    setDepartmentId: (state, action) => {
+      state.id = action.payload;
+    },
     setDepartmentName: (state, action) => {
       state.name = action.payload;
     },
@@ -21,6 +25,6 @@ export const departmentSlice = createSlice({
   },
 });
 
-export const { setDepartmentName, setDepartmentLocation, setDepartmentRole } = departmentSlice.actions;
+export const { setDepartmentId , setDepartmentName, setDepartmentLocation, setDepartmentRole } = departmentSlice.actions;
 
 export default departmentSlice.reducer;

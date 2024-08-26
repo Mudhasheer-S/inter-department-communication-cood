@@ -9,6 +9,7 @@ const AllDepartments = () => {
   const [selectedDepartment, setSelectedDepartment] = useState(null);
   
   const navigate = useNavigate();
+
   const departmentName = useSelector((state) => state.department.name);
   const location = useSelector((state) => state.department.location);
 

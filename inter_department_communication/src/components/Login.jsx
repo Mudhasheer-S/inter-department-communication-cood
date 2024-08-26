@@ -1,7 +1,7 @@
 import React from "react";
 import { useState} from "react";
 import { useDispatch } from 'react-redux';
-import { setDepartmentName, setDepartmentLocation, setDepartmentRole } from '../Redux/departmentSlice';
+import { setDepartmentId, setDepartmentName, setDepartmentLocation, setDepartmentRole } from '../Redux/departmentSlice';
 import axios from "axios";
 import ugov from "../assets/urban_gov.png";
 
@@ -42,9 +42,12 @@ export default function Login() {
         const role = response.data.split("#")[2].trim();
         const location = response.data.split("#")[3].trim();
         const departmentId = response.data.split("#")[4].trim();
+
+        dispatch(setDepartmentId(departmentId));
         dispatch(setDepartmentName(departmentName));
         dispatch(setDepartmentLocation(location));
         dispatch(setDepartmentRole(role));
+        
         setMessage("Login Successful.");
         navigate(`${role}/alldepartment`);
       }

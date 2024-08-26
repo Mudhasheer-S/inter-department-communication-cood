@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 
 export default function IntersectDetails() {
     const department = useSelector((state) => state.department.name);
+    const departmentId = useSelector((state) => state.department.id);
     const { id } = useParams(); 
   const [projects, setProjects] = useState([]);
   const [message, setMessage] = useState('');
@@ -27,13 +28,13 @@ export default function IntersectDetails() {
     {
       if (project.status !== 'Completed') 
       {
-        if (project.department === department) 
+        if (project.departmentId === departmentId) 
         {
           break;
         }
         canWeDo = false;
       }
-      if(project.status==='Completed' && project.department===department)
+      if(project.status==='Completed' && project.departmentId===departmentId)
       {
         completed=true;
         break;
@@ -63,15 +64,15 @@ export default function IntersectDetails() {
             {projects.map(project => (
               <div 
                 key={project.id} 
-                className={`mb-6 p-4 border ${project.department === department ? 'bg-yellow-100 border-yellow-400' : 'bg-white border-gray-300'}`}
+                className={`mb-6 p-4 border ${project.departmentId === departmentId ? 'bg-yellow-100 border-yellow-400' : 'bg-white border-gray-300'}`}
               >
                 <p className="text-lg font-semibold">Project Name: {project.name}</p>
-                <p className="text-lg">Department: {project.department_id}</p>
+                <p className="text-lg">Department: {department}</p>
                 <p className="text-lg">Project Description: {project.description}</p>
                 <p className="text-lg">Project Location: {project.locationName}</p>
                 <p className="text-lg">Start Date: {project.startDate}</p>
                 <p className="text-lg">Status: {project.status}</p>
-                {project.department === department && (
+                {project.departmentId === departmentId && (
                   <p className="mt-2 text-green-600 font-semibold">This is your project!</p>
                 )}
                 <hr className="my-4" />

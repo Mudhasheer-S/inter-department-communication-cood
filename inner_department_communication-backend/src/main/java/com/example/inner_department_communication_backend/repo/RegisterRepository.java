@@ -1,0 +1,19 @@
+package com.example.inner_department_communication_backend.repo;
+
+import java.util.Optional;
+
+import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+import com.example.inner_department_communication_backend.model.Register;
+
+public interface RegisterRepository extends JpaRepository<Register, Long> {
+    Optional<Register> findByEmail(String email);
+    // Register findByName(String name);
+    Register findByDepartmentName(String departmentName);
+
+     @Query("SELECT r.departmentName FROM Register r WHERE r.departmentName <> :departmentName")
+    List<String> findDepartmentNamesExcluding(@Param("departmentName") String departmentName);
+}

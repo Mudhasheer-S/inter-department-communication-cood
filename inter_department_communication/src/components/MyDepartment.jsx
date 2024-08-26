@@ -1,0 +1,156 @@
+import React, { useState, useEffect } from 'react';
+import axios from "axios";
+import { useNavigate } from 'react-router-dom';
+import { FaLocationDot } from "react-icons/fa6";
+import { SlCalender } from "react-icons/sl";
+import { PiClockCountdownFill } from "react-icons/pi";
+import { useSelector } from 'react-redux';
+
+const MyDepartment = () => {
+  const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const navigate = useNavigate();
+  const departmentName = useSelector((state) => state.department.name);
+
+  useEffect(() => {
+    if (!departmentName) return;
+
+    const fetchProjects = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8080/get-project/by-department/${departmentName}`);
+
+        if (response.status === 204) {
+          // No content, set projects to an empty array
+          setProjects([]);
+        } else {
+          setProjects(response.data);
+        }
+      } catch (err) {
+        console.log(err);
+        setError(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProjects();
+  }, [departmentName]);
+
+  const formatDate = (dateStr) => {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(dateStr).toLocaleDateString(undefined, options);
+  };
+
+  const handlePostProjectClick = () => {
+    navigate('/post-project');
+  };
+
+  if (loading) return (
+    <div className="flex justify-center items-center py-8">
+      {/* <Spinner color="primary" /> Using a spinner for loading state */}
+    </div>
+  );
+
+  if (error) return (
+    <div className="container mx-auto py-8">
+      <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+        <strong className="font-bold">Error: </strong>
+        <span className="block sm:inline">{error.message}</span>
+      </div>
+    </div>
+  );
+
+  // Filter projects into ongoing and upcoming
+  const ongoingProjects = projects.filter(project => project.status === 'ongoing');
+  const upcomingProjects = projects.filter(project => project.status === 'upcoming');
+
+  return (
+    <div className="container mx-auto py-8 px-4">
+      <h1 className="text-4xl font-extrabold text-center mb-12 text-gray-600">{departmentName} Projects</h1>
+
+      <div className="flex justify-end mb-6">
+        <button
+          onClick={handlePostProjectClick}
+          className="bg-gray-500 text-white px-6 py-3 rounded-lg shadow-md hover:bg-gray-700 transition duration-300"
+        >
+          Post Project
+        </button>
+      </div>
+
+      {/* No Projects Message */}
+      {projects.length === 0 && (
+        <div className="text-center py-8">
+          <p className="text-gray-600 text-xl">No projects posted.</p>
+        </div>
+      )}
+
+      {/* Ongoing Projects */}
+      {ongoingProjects.length > 0 && (
+        <div>
+          <h2 className="text-3xl font-semibold mb-6 text-gray-800">Ongoing Projects</h2>
+          {ongoingProjects.map((project) => (
+            <div key={project.name} className="bg-white shadow-lg rounded-lg p-8 mb-8 transition-transform transform hover:-translate-y-2 hover:shadow-xl duration-300">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-2xl font-semibold text-gray-900">{project.name}</h3>
+                <p className={`text-sm font-medium ${project.access === 'public' ? 'text-green-600' : 'text-red-600'} italic`}>
+                  {project.access === 'public' ? 'Public' : 'Private'}
+                </p>
+              </div>
+              <p className="text-gray-700 mb-6 leading-relaxed">{project.description}</p>
+              <div className="flex items-center text-gray-600 space-x-6">
+                <div className="flex items-center">
+                  <FaLocationDot className="mr-2 text-green-700" />
+                  <span>{project.locationName}</span>
+                </div>
+                <div className="flex items-center">
+                  <SlCalender className="mr-2 text-green-700" />
+                  <span>{formatDate(project.startDate)}</span>
+                </div>
+                <div className="flex items-center">
+                  <PiClockCountdownFill className="mr-2 text-green-700" />
+                  <span>{project.duration}</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Upcoming Projects */}
+      {upcomingProjects.length > 0 && (
+        <div className="mt-12">
+          <h2 className="text-3xl font-semibold mb-6 text-gray-800">Upcoming Projects</h2>
+          {upcomingProjects.map((project) => (
+            <div key={project.name} className="bg-white shadow-lg rounded-lg p-8 mb-8 transition-transform transform hover:-translate-y-2 hover:shadow-xl duration-300">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-2xl font-semibold text-gray-900">{project.name}</h3>
+                <p className={`text-sm font-medium ${project.access === 'public' ? 'text-green-600' : 'text-red-600'} italic`}>
+                  {project.access === 'public' ? 'Public' : 'Private'}
+                </p>
+              </div>
+              <p className="text-gray-700 mb-6 leading-relaxed">{project.description}</p>
+              <div className="flex items-center text-gray-600 space-x-6">
+                <div className="flex items-center">
+                  <FaLocationDot className="mr-2 text-green-700" />
+                  <span>{project.locationName}</span>
+                </div>
+                <div className="flex items-center">
+                  <SlCalender className="mr-2 text-green-700" />
+                  <span>{formatDate(project.startDate)}</span>
+                </div>
+                <div className="flex items-center">
+                  <PiClockCountdownFill className="mr-2 text-green-700" />
+                  <span>{project.duration}</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default MyDepartment;

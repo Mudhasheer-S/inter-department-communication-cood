@@ -6,11 +6,13 @@ import { useSelector } from "react-redux";
 export default function IntersectDetails() {
     const department = useSelector((state) => state.department.name);
     const departmentId = useSelector((state) => state.department.id);
+    console.log({departmentId});
     const { id } = useParams(); 
   const [projects, setProjects] = useState([]);
   const [message, setMessage] = useState('');
 
   useEffect(() => {
+
     axios.get(`http://localhost:8080/getProjectsWithSameLocation/${id}`)
       .then(response => {
         setProjects(response.data);

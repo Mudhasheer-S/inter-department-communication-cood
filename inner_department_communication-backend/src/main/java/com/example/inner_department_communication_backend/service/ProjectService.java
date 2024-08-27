@@ -32,8 +32,8 @@ public class ProjectService {
     private NotificationRepository notificationRepository;
 
     //post
-    public Project createProject(Project project, String departmentName) {
-        Register department = registerRepository.findByDepartmentNameAndLocation(departmentName,project.getLocationName());
+    public Project createProject(Project project, String departmentName, String departmentLocation) {
+        Register department = registerRepository.findByDepartmentNameAndLocation(departmentName,departmentLocation);
         if (department != null) {
             project.setDepartment(department);
 

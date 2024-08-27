@@ -16,6 +16,7 @@ const PostProjectForm = () => {
   const navigate = useNavigate();
 
   const departmentName = useSelector((state) => state.department.name);
+  const departmentLocation = useSelector((state) => state.department.location);
 
   const handleLocationChoose = () => {
     navigate('/choose-location');
@@ -38,7 +39,7 @@ const PostProjectForm = () => {
 
     try {
       const response = await axios.post(
-        `http://localhost:8080/post-project/${departmentName}`,
+        `http://localhost:8080/post-project/${departmentName}/${departmentLocation}`,
         project
       );
 

@@ -23,11 +23,12 @@ public class ProjectController {
     @Autowired
     private ProjectService projectService;
 
-    @PostMapping("post-project/{departmentName}")
+    @PostMapping("post-project/{departmentName}/{departmentLocation}")
     public ResponseEntity<?> createProject(
             @PathVariable String departmentName,
+            @PathVariable String departmentLocation,
             @RequestBody Project project) {
-        Project createdProject = projectService.createProject(project, departmentName);
+        Project createdProject = projectService.createProject(project, departmentName,departmentLocation);
         if (createdProject != null) {
             return ResponseEntity.status(HttpStatus.CREATED).body("Posted Successfully");
         } else {

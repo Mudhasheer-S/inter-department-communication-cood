@@ -10,7 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import java.time.LocalDate;
+
 
 
 
@@ -36,5 +36,10 @@ public class Project {
     @ManyToOne
     @JoinColumn(name = "department_id", nullable = false)
     private Register department;
+
+
+    @ManyToOne
+    @JoinColumn(name = "project_manager_id")
+    private ProjectManager projectManager; 
 }
 

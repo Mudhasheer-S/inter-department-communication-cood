@@ -2,6 +2,7 @@ package com.example.inner_department_communication_backend.repo;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -42,5 +43,9 @@ List<Project> findProjectsInLocationsWithMultipleDepartments(String department);
                "p.start_date", nativeQuery = true)
 public List<Project> getProjectWithSameLocation(Long id);
 
+
+
+
+Optional<Project> findByName(String name);
 
 }

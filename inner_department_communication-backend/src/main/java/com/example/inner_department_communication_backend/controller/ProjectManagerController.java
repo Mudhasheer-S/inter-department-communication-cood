@@ -79,13 +79,14 @@ public ResponseEntity<Void> assignManagerToProject(
 
 
     @PostMapping("/projectManagerLogin")
-    public ResponseEntity<?> projectManagerLogin(@RequestBody ProjectManager projectManager)
+    public ResponseEntity<String> projectManagerLogin(@RequestBody ProjectManager projectManager)
     {
-        Boolean isLoggedIn = projectManagerService.projectManagerLogin(projectManager.getEmail(),projectManager.getPassword());
-        if(isLoggedIn)
+        ProjectManager isLoggedIn = projectManagerService.projectManagerLogin(projectManager.getEmail(),projectManager.getPassword());
+        if(isLoggedIn!=null)
         {
-            return new ResponseEntity<>(HttpStatus.OK);
+            String id = isLoggedIn.getId().toString();
+            return ResponseEntity.ok(id);
         }
-        return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        return ResponseEntity.status(401).body("Invalid credentials");
     }
 }

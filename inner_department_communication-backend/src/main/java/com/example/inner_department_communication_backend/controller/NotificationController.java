@@ -21,15 +21,12 @@ public class NotificationController {
     private NotificationService notificationService;
 
     @GetMapping("/notifications/{departmentName}")
-    public ResponseEntity<List<NotificationDTO>> getNotificationsByDepartmentName(
+    public List<NotificationDTO> getNotificationsByDepartmentName(
             @PathVariable String departmentName) {
         List<NotificationDTO> notificationDTOs = notificationService.getNotificationsByDepartmentName(departmentName);
         
-        if (notificationDTOs.isEmpty()) {
-            return ResponseEntity.noContent().build(); // 204 No Content if no notifications found
-        }
-        
-        return ResponseEntity.ok(notificationDTOs); // 200 OK with the list of notifications
+
+        return notificationDTOs; // 200 OK with the list of notifications
     }
 
 }

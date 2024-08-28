@@ -23,11 +23,12 @@ public class ProjectController {
     @Autowired
     private ProjectService projectService;
 
-    @PostMapping("post-project/{departmentName}")
+    @PostMapping("post-project/{departmentName}/{departmentLocation}")
     public ResponseEntity<?> createProject(
             @PathVariable String departmentName,
+            @PathVariable String departmentLocation,
             @RequestBody Project project) {
-        Project createdProject = projectService.createProject(project, departmentName);
+        Project createdProject = projectService.createProject(project, departmentName,departmentLocation);
         if (createdProject != null) {
             return ResponseEntity.status(HttpStatus.CREATED).body("Posted Successfully");
         } else {
@@ -45,4 +46,13 @@ public class ProjectController {
         return ResponseEntity.ok(projectDTOs); // 200 OK with the list of ProjectDTOs
     }
 
+    @GetMapping("/intersecting-departments/{department}")
+    public List<Project> getProjectsInLocationsWithMultipleDepartments(@PathVariable String department) {
+        return projectService.getProjectsInLocationsWithMultipleDepartments(department);
+    }
+
+    @GetMapping("/getProjectsWithSameLocation/{id}")
+    public List<Project> getProjectsWithSameLocation(@PathVariable Long id) {
+        return projectService.getProjectWithSameLocation(id);
+    }
 }

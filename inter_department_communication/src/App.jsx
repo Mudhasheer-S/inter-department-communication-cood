@@ -15,6 +15,8 @@ import MyDepartment from "./components/MyDepartment";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import ForumPage from "./pages/ForumPage";
+import Intersectdept from "./components/Intersectdept";
+import IntersectDetails from "./components/IntersectDetails";
 
 
 function App() {
@@ -67,6 +69,8 @@ function App() {
           <Route path="/choose-location" element={<ChoosePlacePage />} />
           <Route path="/all-projects" element={<AllProjectsPage />} />
           <Route path="/interdepartment" element={<ForumPage />} />
+          <Route path="/intersectDept" element={<Intersectdept />} />
+          <Route path="/intersectDetails/:id" element={<IntersectDetails />} />
         </Route>
       </Routes>
     </Router>

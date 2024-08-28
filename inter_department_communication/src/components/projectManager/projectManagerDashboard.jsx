@@ -4,12 +4,13 @@ import ProjectManagerNavbar from './ProjectManagerNavbar';
 
 export default function ProjectManagerDashboard() {
   const [projects, setProjects] = useState([]);
-  const id = useState(1);
+  const [id,setId] = useState(2);
 
   useEffect(() => {
     const fetchProjects = async () => {
       try {
         const response = await axios.get(`http://localhost:8080/getManagerProjects/${id}`);
+        console.log(response.data);
         setProjects(response.data);
       } catch (err) {
         console.error('Error fetching projects:', err);

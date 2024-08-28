@@ -35,7 +35,7 @@ const AssignProjectManager = ({ project, onClose }) => {
     if (selectedManager) {
       console.log(selectedManager);
     try {
-      await axios.post(`http://localhost:8080/assign-exist-manager/${selectedManager.email}/${project.name}`);
+      await axios.post(`http://localhost:8080/assign-exist-manager/${selectedManager.email}/${project.id}`);
      
       onClose(); 
     } catch (error) {
@@ -71,7 +71,7 @@ const AssignProjectManager = ({ project, onClose }) => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        `http://localhost:8080/post-new-manager/${departmentName}/${location}/${project.name}`,
+        `http://localhost:8080/post-new-manager/${departmentName}/${location}/${project.id}`,
         newManager
       );
 

@@ -25,13 +25,13 @@ public class ProjectManagerService {
     private RegisterRepository registerRepository;
 
     //Assign new Manager
-    public ProjectManager createProjectManager(ProjectManager projectManager, String departmentName, String departmentLocation, String projectName) {
-        // Find department by name and location
+    public ProjectManager createProjectManager(ProjectManager projectManager, String departmentName, String departmentLocation, Long  projectId) {
+        
         Register department = registerRepository.findByDepartmentNameAndLocation(departmentName, departmentLocation)
                 .orElseThrow(() -> new RuntimeException("Department not found"));
 
-        // Find project by name
-        Project project = projectRepository.findByName(projectName)
+        
+        Project project = projectRepository.findById(projectId)
                 .orElseThrow(() -> new RuntimeException("Project not found"));
 
         // Set department reference for ProjectManager
@@ -47,13 +47,13 @@ public class ProjectManagerService {
     }
 
     //Assign existing Manager
-    public void assignExistingManagerToProject(String projectManagerEmail, String projectName) {
-        // Find project manager by email
+    public void assignExistingManagerToProject(String projectManagerEmail, Long projectId) {
+        
         ProjectManager projectManager = projectManagerRepository.findByEmail(projectManagerEmail)
                 .orElseThrow(() -> new RuntimeException("Project Manager not found"));
 
-        // Find project by name
-        Project project = projectRepository.findByName(projectName)
+        
+        Project project = projectRepository.findById(projectId)
                 .orElseThrow(() -> new RuntimeException("Project not found"));
 
         // Set project reference for ProjectManager

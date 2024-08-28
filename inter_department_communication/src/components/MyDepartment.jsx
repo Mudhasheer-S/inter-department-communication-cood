@@ -35,6 +35,7 @@ const MyDepartment = () => {
           setProjects([]);
         } else {
           setProjects(response.data);
+        
         }
       } catch (err) {
         console.log(err);

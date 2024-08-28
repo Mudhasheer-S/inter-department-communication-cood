@@ -5,7 +5,7 @@ export default function ProjectManagerDashboard()
     return(
         <div>
             <ProjectManagerNavbar/>
-            Manager Dashboard
+            
         </div>
     );
 }

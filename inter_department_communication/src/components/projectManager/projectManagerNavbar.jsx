@@ -43,13 +43,13 @@ export default function ProjectManagerNavbar() {
         <div className={`lg:flex lg:items-center lg:w-auto ${isOpen ? 'block' : 'hidden'}`}>
           <ul className="lg:flex lg:space-x-4">
             <li>
-              <Link to="/projects" className="block px-4 py-2 text-gray-300 hover:bg-gray-700 rounded">
-                Projects Overview
+              <Link to="/project-manager" className="block px-4 py-2 text-gray-300 hover:bg-gray-700 rounded">
+                My Projects
               </Link>
             </li>
             <li>
-              <Link to="/myprojects" className="block px-4 py-2 text-gray-300 hover:bg-gray-700 rounded">
-                My Projects
+              <Link to="/#" className="block px-4 py-2 text-gray-300 hover:bg-gray-700 rounded">
+                Projects Overview
               </Link>
             </li>
             <li>

@@ -14,8 +14,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.inner_department_communication_backend.DTO.ProjectManagerResponseDTO;
+import com.example.inner_department_communication_backend.model.Project;
 import com.example.inner_department_communication_backend.model.ProjectManager;
+import com.example.inner_department_communication_backend.repo.ProjectRepository;
 import com.example.inner_department_communication_backend.service.ProjectManagerService;
+import com.example.inner_department_communication_backend.service.ProjectService;
 
 @RestController
 @CrossOrigin("*")
@@ -23,6 +26,9 @@ public class ProjectManagerController {
 
     @Autowired
     private ProjectManagerService projectManagerService;
+
+    @Autowired
+    private ProjectService projectService;
 
     @PostMapping("post-new-manager/{departmentName}/{departmentLocation}/{projectId}")
     public ResponseEntity<Void> createProjectManager(
@@ -84,9 +90,14 @@ public ResponseEntity<Void> assignManagerToProject(
         ProjectManager isLoggedIn = projectManagerService.projectManagerLogin(projectManager.getEmail(),projectManager.getPassword());
         if(isLoggedIn!=null)
         {
-            String id = isLoggedIn.getId().toString();
+            String id = isLoggedIn.getId().toString() + "#" + isLoggedIn.getName().toString();
             return ResponseEntity.ok(id);
         }
         return ResponseEntity.status(401).body("Invalid credentials");
+    }
+
+    @GetMapping("/getManagerProjects/{id}")
+    public List<Project> getManagerProjects(@PathVariable int id) {
+        return projectService.getManagerProjects(id);
     }
 }

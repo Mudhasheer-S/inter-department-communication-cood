@@ -102,7 +102,8 @@ public class ProjectService {
         return Collections.emptyList();
     }
 
-    private ProjectDTO convertToDTO(Project project) {
+    private ProjectDTO convertToDTO(Project project) 
+    {
         ProjectDTO dto = new ProjectDTO();
         dto.setId(project.getId());
         dto.setName(project.getName());
@@ -125,5 +126,11 @@ public class ProjectService {
     }
 
         return dto;
+    }
+
+
+    public List<Project> getManagerProjects(int id)
+    {
+        return projectRepository.findByProjectManagerId(id);
     }
 }

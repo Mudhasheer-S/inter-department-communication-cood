@@ -37,7 +37,11 @@ export default function ProjectManagerLogin() {
         formData
       );
       if (response.status === 200) {
-        
+        const projectManagerId = response.data.split("#")[0].trim();
+        const projectManagerName = response.data.split("#")[1].trim();
+
+        console.log(projectManagerId);
+        console.log(projectManagerName);
         setMessage("Login Successful.");
         navigate("/project-manager");
       }

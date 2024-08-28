@@ -48,4 +48,6 @@ public List<Project> getProjectWithSameLocation(Long id);
 
 Optional<Project> findById(Long id);
 
+List<Project> findByProjectManagerId(int id);
+
 }

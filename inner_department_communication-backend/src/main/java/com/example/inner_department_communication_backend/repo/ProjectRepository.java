@@ -46,6 +46,6 @@ public List<Project> getProjectWithSameLocation(Long id);
 
 
 
-Optional<Project> findByName(String name);
+Optional<Project> findById(Long id);
 
 }

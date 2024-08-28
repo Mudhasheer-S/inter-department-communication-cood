@@ -24,15 +24,15 @@ public class ProjectManagerController {
     @Autowired
     private ProjectManagerService projectManagerService;
 
-    @PostMapping("post-new-manager/{departmentName}/{departmentLocation}/{projectName}")
+    @PostMapping("post-new-manager/{departmentName}/{departmentLocation}/{projectId}")
     public ResponseEntity<Void> createProjectManager(
             @RequestBody ProjectManager projectManager,
             @PathVariable String departmentName,
             @PathVariable String departmentLocation,
-            @PathVariable String projectName) {
+            @PathVariable Long projectId) {
 
                 try {
-                    projectManagerService.createProjectManager(projectManager, departmentName, departmentLocation, projectName);
+                    projectManagerService.createProjectManager(projectManager, departmentName, departmentLocation, projectId);
                     return new ResponseEntity<>(HttpStatus.CREATED);
                 } catch (RuntimeException e) {
                    
@@ -41,13 +41,13 @@ public class ProjectManagerController {
     }
 
 
-    @PostMapping("assign-exist-manager/{projectManagerEmail}/{projectName}")
+    @PostMapping("assign-exist-manager/{projectManagerEmail}/{projectId}")
 public ResponseEntity<Void> assignManagerToProject(
         @PathVariable String projectManagerEmail,
-        @PathVariable String projectName) {
+        @PathVariable Long projectId) {
 
     try {
-        projectManagerService.assignExistingManagerToProject(projectManagerEmail, projectName);
+        projectManagerService.assignExistingManagerToProject(projectManagerEmail, projectId);
         return new ResponseEntity<>(HttpStatus.OK);
     } catch (RuntimeException e) {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

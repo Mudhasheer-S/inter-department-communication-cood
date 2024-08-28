@@ -104,6 +104,7 @@ public class ProjectService {
 
     private ProjectDTO convertToDTO(Project project) {
         ProjectDTO dto = new ProjectDTO();
+        dto.setId(project.getId());
         dto.setName(project.getName());
         dto.setDescription(project.getDescription());
         dto.setLocationName(project.getLocationName());

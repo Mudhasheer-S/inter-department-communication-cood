@@ -48,6 +48,8 @@ public List<Project> getProjectWithSameLocation(Long id);
 
 Optional<Project> findById(Long id);
 
-List<Project> findByProjectManagerId(int id);
+@Transactional
+@Query(value = "SELECT p.* FROM project p where project_manager_id=?1", nativeQuery = true)
+public List<Project> findProjectManagerId(int id);
 
 }

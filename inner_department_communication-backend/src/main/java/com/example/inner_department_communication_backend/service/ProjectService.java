@@ -131,6 +131,6 @@ public class ProjectService {
 
     public List<Project> getManagerProjects(int id)
     {
-        return projectRepository.findByProjectManagerId(id);
+        return projectRepository.findProjectManagerId(id);
     }
 }

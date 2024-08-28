@@ -1,6 +1,7 @@
 import React from "react";
 import { useState} from "react";
 import { useDispatch } from 'react-redux';
+import { setProjectManagerId, setProjectManagerName } from '../../Redux/projectManagerSlice';
 import { setDepartmentId, setDepartmentName, setDepartmentLocation, setDepartmentRole } from '../../Redux/departmentSlice';
 import axios from "axios";
 import ugov from "../../assets/urban_gov.png";
@@ -40,6 +41,9 @@ export default function ProjectManagerLogin() {
         const projectManagerId = response.data.split("#")[0].trim();
         const projectManagerName = response.data.split("#")[1].trim();
 
+        dispatch(setProjectManagerId(projectManagerId));
+        dispatch(setProjectManagerName(projectManagerName));
+        
         console.log(projectManagerId);
         console.log(projectManagerName);
         setMessage("Login Successful.");

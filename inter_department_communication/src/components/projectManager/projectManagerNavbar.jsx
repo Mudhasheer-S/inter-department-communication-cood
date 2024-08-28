@@ -8,6 +8,9 @@ export default function ProjectManagerNavbar() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const departmentName = useSelector((state) => state.department.name);
 
+
+  
+
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };

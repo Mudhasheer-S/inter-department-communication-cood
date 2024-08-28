@@ -75,6 +75,13 @@ public class ProjectManagerService {
         return projectManagerRepository.findByDepartments_DepartmentNameAndDepartments_Location(departmentName, departmentLocation);
     }
 
-
-
+    public Boolean projectManagerLogin(String email,String password)
+    {
+        List<ProjectManager> projectManager = projectManagerRepository.findByEmailAndPassword(email,password);
+        if(projectManager.size()>0)
+        {
+            return true;
+        }
+        return false;
+    }
 }

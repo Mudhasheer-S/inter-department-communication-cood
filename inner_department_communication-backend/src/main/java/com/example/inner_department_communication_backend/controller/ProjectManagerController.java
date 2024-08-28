@@ -75,4 +75,17 @@ public ResponseEntity<Void> assignManagerToProject(
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+
+
+    @PostMapping("/projectManagerLogin")
+    public ResponseEntity<?> projectManagerLogin(@RequestBody ProjectManager projectManager)
+    {
+        Boolean isLoggedIn = projectManagerService.projectManagerLogin(projectManager.getEmail(),projectManager.getPassword());
+        if(isLoggedIn)
+        {
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+    }
 }

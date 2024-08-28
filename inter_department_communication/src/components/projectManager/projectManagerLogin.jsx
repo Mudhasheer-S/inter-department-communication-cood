@@ -37,18 +37,9 @@ export default function ProjectManagerLogin() {
         formData
       );
       if (response.status === 200) {
-        const departmentName = response.data.split("#")[1].trim();
-        const role = response.data.split("#")[2].trim();
-        const location = response.data.split("#")[3].trim();
-        const departmentId = response.data.split("#")[4].trim();
-
-        dispatch(setDepartmentId(departmentId));
-        dispatch(setDepartmentName(departmentName));
-        dispatch(setDepartmentLocation(location));
-        dispatch(setDepartmentRole(role));
         
         setMessage("Login Successful.");
-        navigate(`${role}/alldepartment`);
+        navigate("/project-manager");
       }
     } catch (error) {
       console.error(error);

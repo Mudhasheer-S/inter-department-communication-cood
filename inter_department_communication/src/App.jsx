@@ -18,6 +18,7 @@ import ForumPage from "./pages/ForumPage";
 import Intersectdept from "./components/Intersectdept";
 import IntersectDetails from "./components/IntersectDetails";
 import ProjectManagerLogin from "./components/projectManager/projectManagerLogin";
+import ProjectManagerDashboard from "./components/projectManager/projectManagerDashboard";
 
 
 function App() {
@@ -61,6 +62,7 @@ function App() {
       
         <Route path="/" element={<Login />} />
         <Route path="/project-manager-login" element={<ProjectManagerLogin />} />
+        <Route path="/project-manager" element={<ProjectManagerDashboard />} />
 
        
         <Route element={<MainLayout />}>

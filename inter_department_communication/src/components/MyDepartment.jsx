@@ -2,14 +2,22 @@ import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import { FaLocationDot } from "react-icons/fa6";
+import { FaEnvelope } from 'react-icons/fa';
 import { SlCalender } from "react-icons/sl";
 import { PiClockCountdownFill } from "react-icons/pi";
 import { useSelector } from 'react-redux';
+import pm from '../assets/pro_mgr.svg';
+import AssignProjectManager from './AssignProjectManager';
+
 
 const MyDepartment = () => {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [hoveredProject, setHoveredProject] = useState(null);
+
+  const [selectedProject, setSelectedProject] = useState(null); // Track the project for assignment
+  const [showPopup, setShowPopup] = useState(false); // Control the popup visibility
 
   const navigate = useNavigate();
   const departmentName = useSelector((state) => state.department.name);
@@ -27,6 +35,7 @@ const MyDepartment = () => {
           setProjects([]);
         } else {
           setProjects(response.data);
+        
         }
       } catch (err) {
         console.log(err);
@@ -66,6 +75,23 @@ const MyDepartment = () => {
   // Filter projects into ongoing and upcoming
   const ongoingProjects = projects.filter(project => project.status === 'ongoing');
   const upcomingProjects = projects.filter(project => project.status === 'upcoming');
+
+
+  ////assign
+  const handleAssignClick = (project) => {
+    setSelectedProject(project);
+    setShowPopup(true);
+  };
+
+  const handleClosePopup = () => {
+    setShowPopup(false);
+    setSelectedProject(null);
+  };
+
+ 
+
+
+
 
   return (
     <div className="container mx-auto py-8 px-4">
@@ -114,6 +140,43 @@ const MyDepartment = () => {
                   <span>{project.duration}</span>
                 </div>
               </div>
+
+
+
+
+              {project.projectManager ? (
+                <div
+                  className="absolute bottom-4 right-4 flex items-center space-x-2"
+                  onMouseEnter={() => setHoveredProject(project.name)}
+                  onMouseLeave={() => setHoveredProject(null)}
+                >
+                  <img
+                    src={pm}
+                    alt={project.projectManager.name}
+                    className="w-9 h-9 rounded-full border-2 border-white shadow-lg cursor-pointer"
+                  />
+                  {hoveredProject === project.name &&  (
+                    <div className="absolute bottom-12 right-0 bg-gray-700 text-white text-sm rounded-lg shadow-lg p-2 z-10 flex items-center space-x-2">
+                      <span>{project.projectManager.name}</span>
+                      <FaEnvelope className="text-blue-400" />
+                      <span>{project.projectManager.email}</span>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <button
+                  onClick={() => handleAssignClick(project)}
+                  className="absolute bottom-4 right-4 bg-[#055A43] text-white px-4 py-2 rounded-full shadow-md hover:bg-[#00392B] transition duration-300"
+                >
+                  Assign
+                </button>
+              )}
+
+
+
+
+
+
             </div>
           ))}
         </div>
@@ -146,10 +209,54 @@ const MyDepartment = () => {
                   <span>{project.duration}</span>
                 </div>
               </div>
+
+
+              {project.projectManager ? (
+                <div
+                  className="absolute bottom-4 right-4 flex items-center space-x-2"
+                  onMouseEnter={() => setHoveredProject(project.name)}
+                  onMouseLeave={() => setHoveredProject(null)}
+                >
+                  <img
+                    src={pm}
+                    alt={project.projectManager.name}
+                    className="w-9 h-9 rounded-full border-2 border-white shadow-lg cursor-pointer"
+                  />
+                  {hoveredProject === project.name &&  (
+                    <div className="absolute bottom-12 right-0 bg-gray-600 text-white text-sm rounded-lg shadow-lg p-2 z-10 flex items-center space-x-2">
+                      <span>{project.projectManager.name}</span>
+                      <FaEnvelope className="text-blue-400" />
+                      <span>{project.projectManager.email}</span>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <button
+                  onClick={() => handleAssignClick(project)}
+                  className="absolute bottom-4 right-4 bg-[#055A43] text-white px-4 py-2 rounded-full shadow-md hover:bg-[#00392B] transition duration-300"
+                >
+                  Assign
+                </button>
+              )}
+
+
             </div>
           ))}
         </div>
       )}
+
+
+
+      {/* Show the popup for assigning a project manager */}
+      {showPopup && selectedProject && (
+        <AssignProjectManager
+          project={selectedProject}
+          onClose={handleClosePopup}
+        />
+      )}
+
+
+
     </div>
   );
 };

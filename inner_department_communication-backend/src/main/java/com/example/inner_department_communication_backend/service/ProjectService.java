@@ -12,8 +12,10 @@ import org.springframework.stereotype.Service;
 
 
 import com.example.inner_department_communication_backend.DTO.ProjectDTO;
+import com.example.inner_department_communication_backend.DTO.ProjectManagerResponseDTO;
 import com.example.inner_department_communication_backend.model.Notification;
 import com.example.inner_department_communication_backend.model.Project;
+import com.example.inner_department_communication_backend.model.ProjectManager;
 import com.example.inner_department_communication_backend.model.Register;
 import com.example.inner_department_communication_backend.repo.NotificationRepository;
 import com.example.inner_department_communication_backend.repo.ProjectRepository;
@@ -33,7 +35,7 @@ public class ProjectService {
 
     //post
     public Project createProject(Project project, String departmentName, String departmentLocation) {
-        Register department = registerRepository.findByDepartmentNameAndLocation(departmentName,departmentLocation);
+        Register department = registerRepository.findByDepartmentNameAndLocation(departmentName,departmentLocation).orElseThrow(() -> new RuntimeException("Department not found"));
         if (department != null) {
             project.setDepartment(department);
 
@@ -90,7 +92,7 @@ public class ProjectService {
 
     //get
     public List<ProjectDTO> getProjectsByDepartmentName(String departmentName,String location) {
-        Register department = registerRepository.findByDepartmentNameAndLocation(departmentName,location);
+        Register department = registerRepository.findByDepartmentNameAndLocation(departmentName,location).orElseThrow(() -> new RuntimeException("Department not found"));
         if (department != null) {
             List<Project> projects = projectRepository.findByDepartment(department);
             return projects.stream()
@@ -100,8 +102,10 @@ public class ProjectService {
         return Collections.emptyList();
     }
 
-    private ProjectDTO convertToDTO(Project project) {
+    private ProjectDTO convertToDTO(Project project) 
+    {
         ProjectDTO dto = new ProjectDTO();
+        dto.setId(project.getId());
         dto.setName(project.getName());
         dto.setDescription(project.getDescription());
         dto.setLocationName(project.getLocationName());
@@ -111,6 +115,22 @@ public class ProjectService {
         dto.setStartDate(project.getStartDate());
         dto.setDuration(project.getDuration());
         dto.setAccess(project.getAccess());
+
+        // Set Project Manager if present
+    ProjectManager manager = project.getProjectManager();
+    if (manager != null) {
+        ProjectManagerResponseDTO managerDTO = new ProjectManagerResponseDTO();
+        managerDTO.setName(manager.getName());
+        managerDTO.setEmail(manager.getEmail());
+        dto.setProjectManager(managerDTO); // Set the ProjectManagerResponseDTO in ProjectDTO
+    }
+
         return dto;
+    }
+
+
+    public List<Project> getManagerProjects(int id)
+    {
+        return projectRepository.findProjectManagerId(id);
     }
 }

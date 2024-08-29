@@ -18,6 +18,18 @@ const ChoosePlacePage = () => {
         const response = await fetch(
           `https://nominatim.openstreetmap.org/search?format=json&q=${query}&countrycodes=in&addressdetails=1`
         );
+
+
+      if (response.status === 429) {
+        // Handle rate limit exceeded
+        console.error('Rate limit exceeded. Please try again later.');
+        return;
+      }
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
         const data = await response.json();
         setSuggestions(data);
       } catch (error) {

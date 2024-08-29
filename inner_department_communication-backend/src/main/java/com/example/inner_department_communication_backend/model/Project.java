@@ -1,5 +1,7 @@
 package com.example.inner_department_communication_backend.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -10,7 +12,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import java.time.LocalDate;
+
 
 
 
@@ -36,5 +38,11 @@ public class Project {
     @ManyToOne
     @JoinColumn(name = "department_id", nullable = false)
     private Register department;
+
+
+    @ManyToOne
+    @JoinColumn(name = "project_manager_id")
+    @JsonBackReference
+    private ProjectManager projectManager; 
 }
 

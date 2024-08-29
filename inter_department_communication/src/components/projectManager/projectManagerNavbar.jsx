@@ -59,7 +59,7 @@ export default function ProjectManagerNavbar() {
               </Link>
             </li>
             <li>
-              <Link to="/resources" className="block px-4 py-2 text-gray-300 hover:bg-gray-700 rounded">
+              <Link to="/project-manager-resources" className="block px-4 py-2 text-gray-300 hover:bg-gray-700 rounded">
                 Resources
               </Link>
             </li>
@@ -83,7 +83,7 @@ export default function ProjectManagerNavbar() {
               )}
             </li>
             <li>
-              <Link to="/notifications" className="block px-4 py-3 text-gray-300 hover:bg-gray-700 rounded">
+              <Link to="/project-manager-notification" className="block px-4 py-3 text-gray-300 hover:bg-gray-700 rounded">
                 <IoNotifications />
               </Link>
             </li>

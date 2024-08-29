@@ -24,6 +24,7 @@ import Intersectdept from "./components/Intersectdept";
 import IntersectDetails from "./components/IntersectDetails";
 import ProjectManagerLogin from "./components/projectManager/projectManagerLogin";
 import ProjectManagerDashboard from "./components/projectManager/projectManagerDashboard";
+import ProjectMnagerResources from "./components/projectManager/projectMnagerResources";
 
 function App() {
   // const MainLayout = () => {
@@ -42,6 +43,7 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path="/project-manager-login" element={<ProjectManagerLogin />} />
           <Route path="/project-manager" element={<ProjectManagerDashboard />} />
+          <Route path="/project-manager-resources" element={<ProjectMnagerResources />} />
           <Route path="/head/alldepartment" element={<AllDepartments />} />
           <Route path="/notification" element={<Notification />} />
           <Route path="/mydepartment" element={<MyDepartment />} />

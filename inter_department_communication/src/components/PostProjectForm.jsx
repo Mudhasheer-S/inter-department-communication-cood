@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
+import Navbar from './Navbar';
 
 const PostProjectForm = () => {
   const locationFromChoosePlace = useLocation().state?.location;
@@ -56,7 +57,9 @@ const PostProjectForm = () => {
 
 
   return (
-    <div className="container mx-auto py-8">
+    <>
+    <Navbar />
+    <div className="max-w-screen-lg mx-auto py-8">
       <h1 className="text-3xl font-bold text-center mb-8">Post New Project</h1>
       <form onSubmit={handleSubmit} className="max-w-xxl mx-auto bg-white shadow-md rounded-lg p-6">
         <div className="mb-4">
@@ -100,7 +103,7 @@ const PostProjectForm = () => {
             value={status}
             onChange={(e) => setStatus(e.target.value)}
             className="w-full px-4 py-2 border border-gray-300 rounded"
-          >
+            >
             <option value="ongoing">Ongoing</option>
             <option value="upcoming">Upcoming</option>
           </select>
@@ -114,7 +117,7 @@ const PostProjectForm = () => {
             onChange={(e) => setStartDate(e.target.value)}
             required
             className="w-full px-4 py-2 border border-gray-300 rounded"
-          />
+            />
         </div>
 
         <div className="mb-4">
@@ -125,7 +128,7 @@ const PostProjectForm = () => {
             onChange={(e) => setDuration(e.target.value)}
             placeholder="e.g., 2 months or 1 year"
             className="w-full px-4 py-2 border border-gray-300 rounded"
-          />
+            />
         </div>
 
         <div className="mb-4">
@@ -143,11 +146,12 @@ const PostProjectForm = () => {
         <button
           type="submit"
           className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-700 transition duration-300"
-        >
+          >
           Submit
         </button>
       </form>
     </div>
+  </>
   );
 };
 

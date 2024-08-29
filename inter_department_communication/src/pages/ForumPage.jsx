@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FaSearch, FaSort, FaFilter, FaTags, FaPlus, FaRegBell, FaReply, FaThumbsUp, FaTimes } from 'react-icons/fa';
+import Navbar from '../components/Navbar';
 
 const ForumPage = () => {
   const [threads, setThreads] = useState([
@@ -159,7 +160,9 @@ const ForumPage = () => {
   );
 
   return (
-    <div className="container mx-auto py-8 px-4">
+    <>
+    <Navbar />
+    <div className="max-w-screen-2xl mx-auto py-8 px-4">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-4xl font-bold text-gray-700">Interdepartmental Coordination Forum</h1>
         <div className="relative">
@@ -178,7 +181,7 @@ const ForumPage = () => {
         <button
           className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 flex items-center"
           onClick={() => setShowModal(true)}
-        >
+          >
           <FaPlus className="mr-2" /> New Thread
         </button>
       </div>
@@ -198,13 +201,13 @@ const ForumPage = () => {
           <div className="space-y-4">
             {filteredThreads.map((thread) => (
               <div
-                key={thread.id}
-                className={`p-4 border rounded-lg cursor-pointer ${
-                  selectedThread && selectedThread.id === thread.id
-                    ? 'bg-[#f0fffa] border-green-300'
-                    : 'bg-white border-gray-300 hover:bg-gray-100'
-                } flex items-center justify-between`}
-                onClick={() => handleThreadClick(thread)}
+              key={thread.id}
+              className={`p-4 border rounded-lg cursor-pointer ${
+                selectedThread && selectedThread.id === thread.id
+                ? 'bg-[#f0fffa] border-green-300'
+                : 'bg-white border-gray-300 hover:bg-gray-100'
+              } flex items-center justify-between`}
+              onClick={() => handleThreadClick(thread)}
               >
                 <div className="flex items-center">
                   <img src={thread.avatar} alt={thread.department} className="w-12 h-12 rounded-full mr-4" />
@@ -295,7 +298,7 @@ const ForumPage = () => {
                 <button
                   className="mt-4 px-6 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700"
                   onClick={handleNewMessageSubmit}
-                >
+                  >
                   Post Message
                 </button>
               </div>
@@ -338,7 +341,7 @@ const ForumPage = () => {
               onChange={(e) => setNewThreadMessage(e.target.value)}
               className="border rounded-lg px-4 py-2 w-full mb-4"
               rows="4"
-            />
+              />
             <button
               className="px-6 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700"
               onClick={handleNewThreadSubmit}
@@ -349,6 +352,7 @@ const ForumPage = () => {
         </div>
       )}
     </div>
+  </>
   );
 };
 

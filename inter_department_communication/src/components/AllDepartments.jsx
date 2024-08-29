@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import DepartmentProjects from './DepartmentProjects';
+import Navbar from './Navbar';
 
 const AllDepartments = () => {
   const [departmentNames, setDepartmentNames] = useState([]);
@@ -37,11 +38,13 @@ const AllDepartments = () => {
   };
 
   return (
-    <div className="container mx-auto py-8">
+    <>
+    <Navbar />
+    <div className="mx-auto py-8">
       {!selectedDepartment ? (
         <>
           <h1 className="text-3xl font-bold text-center mb-8">Urban Governance Departments</h1>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 ml-11">
             {departmentNames.map((name, index) => (
               <div
                 key={index}
@@ -65,6 +68,7 @@ const AllDepartments = () => {
         <DepartmentProjects departmentName={selectedDepartment} location={location} onBack={handleBack} />
       )}
     </div>
+  </>
   );
 };
 

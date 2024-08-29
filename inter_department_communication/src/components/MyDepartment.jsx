@@ -8,6 +8,7 @@ import { PiClockCountdownFill } from "react-icons/pi";
 import { useSelector } from 'react-redux';
 import pm from '../assets/pro_mgr.svg';
 import AssignProjectManager from './AssignProjectManager';
+import Navbar from './Navbar';
 
 
 const MyDepartment = () => {
@@ -94,7 +95,9 @@ const MyDepartment = () => {
 
 
   return (
-    <div className="container mx-auto py-8 px-4">
+    <>
+    <Navbar />
+    <div className="max-w-screen-xl mx-auto py-8 px-4">
       <h1 className="text-4xl font-extrabold text-center mb-12 text-gray-600">{departmentName} Projects</h1>
 
       <div className="flex justify-end mb-6">
@@ -258,6 +261,7 @@ const MyDepartment = () => {
 
 
     </div>
+    </>
   );
 };
 

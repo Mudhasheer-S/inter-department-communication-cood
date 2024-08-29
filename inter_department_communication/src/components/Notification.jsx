@@ -4,6 +4,7 @@ import { FaExclamationTriangle, FaInfoCircle } from 'react-icons/fa';
 import { VscFeedback } from 'react-icons/vsc';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
+import Navbar from './Navbar';
 
 const notificationsData = {
   whatsNew: [
@@ -67,6 +68,8 @@ const NotificationsPage = () => {
   };
 
   return (
+    <>
+    <Navbar />
     <div className="p-10 bg-gray-50 min-h-screen">
       <div className="mb-6 flex space-x-6">
         {['projectAlerts', 'whatsNew', 'publicGrievance'].map((type) => (
@@ -108,6 +111,7 @@ const NotificationsPage = () => {
         ))}
       </div>
     </div>
+  </>
   );
 };
 

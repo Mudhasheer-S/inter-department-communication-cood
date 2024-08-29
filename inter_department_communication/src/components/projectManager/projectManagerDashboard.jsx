@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ProjectManagerNavbar from './ProjectManagerNavbar';
+import { useSelector } from 'react-redux';
 
 export default function ProjectManagerDashboard() {
   const [projects, setProjects] = useState([]);
   const [selectedProject, setSelectedProject] = useState(null);
-  const [id, setId] = useState(2);
-
+  const projectManagerId = useSelector((state) => state.projectManager.id);
+  const projectManagerName = useSelector((state) => state.projectManager.name);
+const id = projectManagerId;
   useEffect(() => {
     const fetchProjects = async () => {
       try {

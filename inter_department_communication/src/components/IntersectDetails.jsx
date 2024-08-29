@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useSelector } from "react-redux";
+import Navbar from './Navbar';
 
 export default function IntersectDetails() {
     const department = useSelector((state) => state.department.name);
@@ -46,6 +47,8 @@ export default function IntersectDetails() {
     };
 
     return (
+        <>
+        <Navbar />
         <div className="flex justify-center items-center min-h-screen bg-gray-100 p-6">
             <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-3xl">
                 <h1 className="text-2xl font-semibold mb-4">Intersect Details</h1>
@@ -79,5 +82,6 @@ export default function IntersectDetails() {
                 )}
             </div>
         </div>
+    </>
     );
 }

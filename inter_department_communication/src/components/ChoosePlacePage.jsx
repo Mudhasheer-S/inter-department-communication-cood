@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { useNavigate } from 'react-router-dom';
+import Navbar from './Navbar';
 
 const ChoosePlacePage = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -67,6 +68,8 @@ const ChoosePlacePage = () => {
   };
 
   return (
+    <>
+    <Navbar />
     <div className="flex h-screen">
       <div className="w-3/4">
         <MapContainer center={[20.5937, 78.9629]} zoom={5} style={{ height: '100%', width: '100%' }}>
@@ -107,11 +110,12 @@ const ChoosePlacePage = () => {
           onClick={handleChooseLocation}
           disabled={!location}
           className="w-full bg-blue-500 text-white px-4 py-2 rounded disabled:bg-gray-300"
-        >
+          >
           Choose Location
         </button>
       </div>
     </div>
+  </>
   );
 };
 

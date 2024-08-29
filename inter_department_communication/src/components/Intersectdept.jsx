@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import Navbar from "./Navbar";
 
 export default function Intersectdept() {
   const [projects, setProjects] = useState([]);
@@ -22,6 +23,8 @@ export default function Intersectdept() {
   }, [department]);
 
   return (
+    <>
+    <Navbar />
     <div className="min-h-screen bg-gray-100">
         <div className="p-6 flex-grow">
           {projects.length > 0 ? (
@@ -47,5 +50,6 @@ export default function Intersectdept() {
           )}
         </div>
     </div>
+  </>
   );
 }

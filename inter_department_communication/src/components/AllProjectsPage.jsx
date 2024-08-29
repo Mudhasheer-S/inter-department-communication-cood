@@ -2,12 +2,15 @@ import React from 'react';
 import { MapContainer, TileLayer, Marker, Tooltip } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { useLocation } from 'react-router-dom';
+import Navbar from './Navbar';
 
 const AllProjectsPage = () => {
   const location = useLocation();
   const projects = location.state?.projects || [];
 
   return (
+    <>
+    <Navbar />
     <div>
       <h2>All Projects</h2>
       <MapContainer center={[20.5937, 78.9629]} zoom={5} style={{ height: '400px', width: '100%' }}>
@@ -19,6 +22,7 @@ const AllProjectsPage = () => {
         ))}
       </MapContainer>
     </div>
+  </>
   );
 };
 

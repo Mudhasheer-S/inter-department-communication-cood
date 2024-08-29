@@ -35,6 +35,8 @@ const PostProjectForm = () => {
       startDate,
       duration,
       access,
+      endDate:"",
+      cost:""
     };
   
 

@@ -47,26 +47,12 @@ public class ProjectController {
     }
 
     @GetMapping("/intersecting-departments/{department}/{location}")
-    public ResponseEntity<List<ProjectDTO>> getProjects(@PathVariable String department, @PathVariable String location) {
-        try {
-            List<ProjectDTO> projects = projectService.getProjectsInLocationsWithMultipleDepartments(department, location);
-            return ResponseEntity.ok(projects);
-        } catch (Exception e) {
-            // Log and handle exception
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+    public List<ProjectDTO> getProjectsInLocationsWithMultipleDepartments(@PathVariable String department,@PathVariable String location) {
+        return projectService.getProjectsInLocationsWithMultipleDepartments(department,location);
     }
 
     @GetMapping("/getProjectsWithSameLocation/{id}")
-    public ResponseEntity<List<ProjectDTO>> getProjectsWithSameLocation(@PathVariable Long id) {
-        try {
-            List<ProjectDTO> projects = projectService.getProjectWithSameLocation(id);
-            return ResponseEntity.ok(projects);
-        } catch (Exception e) {
-            // Log and handle exception
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+    public List<ProjectDTO> getProjectsWithSameLocation(@PathVariable Long id) {
+        return projectService.getProjectWithSameLocation(id);
     }
 }

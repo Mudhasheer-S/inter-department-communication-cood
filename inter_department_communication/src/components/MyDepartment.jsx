@@ -23,14 +23,13 @@ const MyDepartment = () => {
   const navigate = useNavigate();
   const departmentName = useSelector((state) => state.department.name);
   const location = useSelector((state) => state.department.location);
-  const role = useSelector((state) => state.department.role);
 
   useEffect(() => {
     if (!departmentName) return;
 
     const fetchProjects = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/get-project/by-department/${departmentName}/${location}/${role}`);
+        const response = await axios.get(`http://localhost:8080/get-project/by-department/${departmentName}/${location}`);
 
         if (response.status === 204) {
           // No content, set projects to an empty array

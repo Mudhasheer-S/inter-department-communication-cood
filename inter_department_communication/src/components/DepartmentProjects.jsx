@@ -6,7 +6,7 @@ import { PiClockCountdownFill } from "react-icons/pi";
 import { IoReturnUpBack } from "react-icons/io5";
 import { useSelector } from 'react-redux';
 
-const DepartmentProjects = ({ departmentName,location,role, onBack }) => {
+const DepartmentProjects = ({ departmentName,location, onBack }) => {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -19,7 +19,7 @@ const DepartmentProjects = ({ departmentName,location,role, onBack }) => {
       setLoading(true);
       setError(null);
       try {
-        const response = await axios.get(`http://localhost:8080/get-project/by-department/${departmentName}/${location}/${role}`);
+        const response = await axios.get(`http://localhost:8080/get-project/by-department/${departmentName}/${location}`);
         setProjects(response.data);
       } catch (err) {
         console.error("Error fetching projects:", err);

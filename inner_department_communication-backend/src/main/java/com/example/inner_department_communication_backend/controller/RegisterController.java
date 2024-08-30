@@ -43,9 +43,9 @@ public class RegisterController {
     }
 
 
-    @GetMapping("/departments-name/{departmentName}/{location}/{role}")
-    public ResponseEntity<List<String>> getDepartmentNamesExcluding(@PathVariable String departmentName,@PathVariable String location,@PathVariable String role) {
-        List<String> departmentNames = registerService.getDepartmentNamesExcluding(departmentName,location,role);
+    @GetMapping("/departments-name/{departmentName}/{location}")
+    public ResponseEntity<List<String>> getDepartmentNamesExcluding(@PathVariable String departmentName,@PathVariable String location) {
+        List<String> departmentNames = registerService.getDepartmentNamesExcluding(departmentName,location);
 
         if (departmentNames.isEmpty()) {
             return ResponseEntity.noContent().build(); // 204 No Content if no departments found

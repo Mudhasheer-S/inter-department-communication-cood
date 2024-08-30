@@ -6,13 +6,14 @@ import Navbar from "./Navbar";
 export default function Intersectdept() {
   const [projects, setProjects] = useState([]);
   const department = useSelector((state) => state.department.name);
+  const location = useSelector((state) => state.department.location);
 
 
   useEffect(() => {
     const func = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/intersecting-departments/${department}`
+          `http://localhost:8080/intersecting-departments/${department}/${location}`
         );
         setProjects(response.data);
       } catch (error) {

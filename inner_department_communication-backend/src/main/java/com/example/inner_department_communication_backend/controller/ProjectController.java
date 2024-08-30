@@ -46,9 +46,9 @@ public class ProjectController {
         return ResponseEntity.ok(projectDTOs); // 200 OK with the list of ProjectDTOs
     }
 
-    @GetMapping("/intersecting-departments/{department}")
-    public List<Project> getProjectsInLocationsWithMultipleDepartments(@PathVariable String department) {
-        return projectService.getProjectsInLocationsWithMultipleDepartments(department);
+    @GetMapping("/intersecting-departments/{department}/{location}")
+    public List<Project> getProjectsInLocationsWithMultipleDepartments(@PathVariable String department,@PathVariable String location) {
+        return projectService.getProjectsInLocationsWithMultipleDepartments(department,location);
     }
 
     @GetMapping("/getProjectsWithSameLocation/{id}")

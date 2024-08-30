@@ -76,8 +76,8 @@ public class ProjectService {
     }
 
 
-    public List<Project> getProjectsInLocationsWithMultipleDepartments(String department) {
-        return projectRepository.findProjectsInLocationsWithMultipleDepartments(department);
+    public List<Project> getProjectsInLocationsWithMultipleDepartments(String department,String location) {
+        return projectRepository.findProjectsInLocationsWithMultipleDepartments(department,location);
     }
 
     public List<Project> getProjectWithSameLocation(Long id)

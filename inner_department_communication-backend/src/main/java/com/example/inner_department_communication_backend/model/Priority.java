@@ -13,7 +13,6 @@ public class Priority {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String department;
-    private int department_id;
     private int priority;
 }
 

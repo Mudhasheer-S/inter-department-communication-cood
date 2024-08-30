@@ -134,6 +134,7 @@ public ResponseEntity<String> completeProject(
         // Update project details
         project.setCost(Double.parseDouble(finalCost));
         project.setEndDate(endDate);
+        project.setStatus("completed");
         projectRepository.save(project);
 
         // Process images

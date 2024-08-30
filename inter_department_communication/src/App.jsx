@@ -25,6 +25,8 @@ import IntersectDetails from "./components/IntersectDetails";
 import ProjectManagerLogin from "./components/projectManager/projectManagerLogin";
 import ProjectManagerDashboard from "./components/projectManager/projectManagerDashboard";
 import ProjectMnagerResources from "./components/projectManager/projectMnagerResources";
+import SiteEngineerHome from "./components/sitengineer/siteEngineerHome";
+import DailyProgressReport from "./components/sitengineer/DailyProgressReport";
 
 function App() {
   // const MainLayout = () => {
@@ -53,6 +55,9 @@ function App() {
           <Route path="/interdepartment" element={<ForumPage />} />
           <Route path="/intersectDept" element={<Intersectdept />} />
           <Route path="/intersectDetails/:id" element={<IntersectDetails />} />
+          
+          <Route path="/siteEngineer/alldepartment" element={<SiteEngineerHome />} />
+          <Route path="/siteEngineer/report" element={<DailyProgressReport/>}/>
         </Routes>
       </Router>
     </>

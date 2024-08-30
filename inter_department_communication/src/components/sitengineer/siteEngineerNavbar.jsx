@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom'; // If using React Router for navigation
 import { IoNotifications } from "react-icons/io5";
 import { useSelector } from 'react-redux';
 
-export default function ProjectManagerNavbar() {
+export default function SiteEngineerNavbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  const projectManagerName = useSelector((state) => state.projectManager.name);
+  const siteEngineerName = useSelector((state) => state.siteEngineer.name);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -25,7 +25,7 @@ export default function ProjectManagerNavbar() {
     <nav className="bg-[#1d342e] text-white p-4">
       <div className="container mx-auto flex justify-between items-center">
         <div className="text-2xl font-bold">
-          <h2>Hi! {projectManagerName}</h2>
+          <h2>Hi! {siteEngineerName}</h2>
         </div>
         <button
           onClick={toggleMenu}
@@ -44,13 +44,13 @@ export default function ProjectManagerNavbar() {
         <div className={`lg:flex lg:items-center lg:w-auto ${isOpen ? 'block' : 'hidden'}`}>
           <ul className="lg:flex lg:space-x-4">
             <li>
-              <Link to="/project-manager" className="block px-4 py-2 text-gray-300 hover:bg-gray-700 rounded">
+              <Link to="/siteEngineer/alldepartment" className="block px-4 py-2 text-gray-300 hover:bg-gray-700 rounded">
                 My Projects
               </Link>
             </li>
             <li>
-              <Link to="/#" className="block px-4 py-2 text-gray-300 hover:bg-gray-700 rounded">
-                Projects Overview
+              <Link to="/siteEngineer/report" className="block px-4 py-2 text-gray-300 hover:bg-gray-700 rounded">
+                Daily Report
               </Link>
             </li>
             <li>
@@ -59,7 +59,7 @@ export default function ProjectManagerNavbar() {
               </Link>
             </li>
             <li>
-              <Link to="/project-manager-resources" className="block px-4 py-2 text-gray-300 hover:bg-gray-700 rounded">
+              <Link to="/#" className="block px-4 py-2 text-gray-300 hover:bg-gray-700 rounded">
                 Resources
               </Link>
             </li>
@@ -73,17 +73,17 @@ export default function ProjectManagerNavbar() {
               </span>
               {isDropdownOpen && (
                 <div className="absolute left-0 mt-2 w-48 bg-gray-800 rounded shadow-lg">
-                  <Link to="/interdepartment" className="block px-4 py-2 text-gray-300 hover:bg-gray-700 rounded">
+                  <Link to="/#" className="block px-4 py-2 text-gray-300 hover:bg-gray-700 rounded">
                     Interdepartment
                   </Link>
-                  <Link to="/intradepartment" className="block px-4 py-2 text-gray-300 hover:bg-gray-700 rounded">
+                  <Link to="/#" className="block px-4 py-2 text-gray-300 hover:bg-gray-700 rounded">
                     Intradepartment
                   </Link>
                 </div>
               )}
             </li>
             <li>
-              <Link to="/project-manager-notification" className="block px-4 py-3 text-gray-300 hover:bg-gray-700 rounded">
+              <Link to="/#" className="block px-4 py-3 text-gray-300 hover:bg-gray-700 rounded">
                 <IoNotifications />
               </Link>
             </li>

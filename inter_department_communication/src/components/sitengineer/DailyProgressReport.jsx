@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import SiteEngineerNavbar from './siteEngineerNavbar';
 
 function DailyProgressReport() {
   const [formData, setFormData] = useState({
@@ -32,7 +33,9 @@ function DailyProgressReport() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-8 bg-white shadow-md rounded-lg">
+    <>
+    <SiteEngineerNavbar />
+    <div className="max-w-4xl mx-auto p-8 bg-white shadow-md rounded-lg mt-9">
       <h2 className="text-2xl font-bold mb-6">Daily Progress Report</h2>
       <form>
         <div className="grid grid-cols-2 gap-6 mb-6">
@@ -44,7 +47,7 @@ function DailyProgressReport() {
               value={formData.projectName}
               onChange={handleChange}
               className="w-full p-2 border border-gray-300 rounded"
-            />
+              />
           </div>
           <div>
             <label className="block text-gray-700">Job Number:</label>
@@ -54,7 +57,7 @@ function DailyProgressReport() {
               value={formData.jobNumber}
               onChange={handleChange}
               className="w-full p-2 border border-gray-300 rounded"
-            />
+              />
           </div>
           <div>
             <label className="block text-gray-700">Contractor Name:</label>
@@ -64,7 +67,7 @@ function DailyProgressReport() {
               value={formData.contractorName}
               onChange={handleChange}
               className="w-full p-2 border border-gray-300 rounded"
-            />
+              />
           </div>
           <div>
             <label className="block text-gray-700">Superintendent Name:</label>
@@ -84,7 +87,7 @@ function DailyProgressReport() {
               value={formData.date}
               onChange={handleChange}
               className="w-full p-2 border border-gray-300 rounded"
-            />
+              />
           </div>
           <div>
             <label className="block text-gray-700">Weather and Temperature:</label>
@@ -94,7 +97,7 @@ function DailyProgressReport() {
               value={formData.weatherTemperature}
               onChange={handleChange}
               className="w-full p-2 border border-gray-300 rounded"
-            />
+              />
           </div>
         </div>
         <div className="mb-6">
@@ -104,7 +107,7 @@ function DailyProgressReport() {
             value={formData.overallProgress}
             onChange={handleChange}
             className="w-full p-2 border border-gray-300 rounded h-32"
-          ></textarea>
+            ></textarea>
         </div>
 
         <h3 className="text-xl font-semibold mb-4">Workers Present on Site</h3>
@@ -135,7 +138,7 @@ function DailyProgressReport() {
                       value={worker.workCompleted}
                       onChange={(e) => handleChange(e, index, 'workCompleted')}
                       className="w-full p-2 border border-gray-300 rounded"
-                    />
+                      />
                   </td>
                   <td className="border border-gray-300 p-2">
                     <input
@@ -143,7 +146,7 @@ function DailyProgressReport() {
                       value={worker.equipmentUsed}
                       onChange={(e) => handleChange(e, index, 'equipmentUsed')}
                       className="w-full p-2 border border-gray-300 rounded"
-                    />
+                      />
                   </td>
                   <td className="border border-gray-300 p-2">
                     <input
@@ -151,7 +154,7 @@ function DailyProgressReport() {
                       value={worker.progressDetails}
                       onChange={(e) => handleChange(e, index, 'progressDetails')}
                       className="w-full p-2 border border-gray-300 rounded"
-                    />
+                      />
                   </td>
                 </tr>
               ))}
@@ -162,17 +165,18 @@ function DailyProgressReport() {
           type="button"
           onClick={addWorkerRow}
           className="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 "
-        >
+          >
           Add Worker
         </button>
         <button
           type="submit"
           className="mt-4 ml-4 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
-        >
+          >
           Submit
         </button>
       </form>
     </div>
+  </>
   );
 }
 

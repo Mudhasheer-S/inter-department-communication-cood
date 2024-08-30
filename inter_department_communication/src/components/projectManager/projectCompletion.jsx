@@ -1,19 +1,19 @@
 // ProjectCompletion.js
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
 
 export default function ProjectCompletion({ project, onBack }) {
   const [completionDetails, setCompletionDetails] = useState({
-    finalCost: '',
-    endDate: '',
-    images: []
+    finalCost: "",
+    endDate: "",
+    images: [],
   });
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setCompletionDetails((prevState) => ({
       ...prevState,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -21,47 +21,46 @@ export default function ProjectCompletion({ project, onBack }) {
     const files = Array.from(e.target.files);
     const newImages = files.map((file) => ({
       file,
-      preview: URL.createObjectURL(file)
+      preview: URL.createObjectURL(file),
     }));
 
     setCompletionDetails((prevState) => ({
       ...prevState,
-      images: [...prevState.images, ...newImages]
+      images: [...prevState.images, ...newImages],
     }));
   };
 
   const removeImage = (index) => {
     setCompletionDetails((prevState) => ({
       ...prevState,
-      images: prevState.images.filter((_, i) => i !== index)
+      images: prevState.images.filter((_, i) => i !== index),
     }));
   };
 
   const handleSubmitCompletion = async () => {
     const formData = new FormData();
-    formData.append('finalCost', completionDetails.finalCost);
-    formData.append('endDate', completionDetails.endDate);
-  
-    // Append each image file
-    completionDetails.images.forEach((image, index) => {
-      formData.append('images', image.file); // Use 'images' as key without index
+    formData.append("finalCost", completionDetails.finalCost);
+    formData.append("endDate", completionDetails.endDate);
+
+    completionDetails.images.forEach((image) => {
+      formData.append("images", image.file);
     });
-    for (const [key, value] of formData.entries()) {
-      console.log(`${key}: ${value}`);
-    }
-    
 
     try {
-      await axios.post(`http://localhost:8080/completeProject/${project.id}`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
+      await axios.post(
+        `http://localhost:8080/completeProject/${project.id}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
         }
-      });
-      alert('Project marked as completed!');
-      onBack();  // Go back to project list after completion
+      );
+      alert("Project marked as completed!");
+      onBack();
     } catch (err) {
-      console.error('Error marking project as completed:', err);
-      alert('Failed to mark project as completed.');
+      console.error("Error marking project as completed:", err);
+      alert("Failed to mark project as completed.");
     }
   };
 
@@ -97,7 +96,7 @@ export default function ProjectCompletion({ project, onBack }) {
           className="mt-1"
         />
       </div>
-      
+
       <div className="mb-4 grid grid-cols-2 md:grid-cols-4 gap-2">
         {completionDetails.images.map((image, index) => (
           <div key={index} className="relative">

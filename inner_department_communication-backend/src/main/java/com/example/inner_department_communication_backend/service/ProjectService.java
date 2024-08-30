@@ -129,8 +129,12 @@ public class ProjectService {
     }
 
 
-    public List<Project> getManagerProjects(int id)
+    public List<ProjectDTO> getManagerProjects(Long id)
     {
-        return projectRepository.findProjectManagerId(id);
+        List<Project> projects = projectRepository.findProjectManagerId(id);
+        return projects.stream()
+                       .map(this::convertToDTO) // Convert each Project to ProjectDTO
+                       .collect(Collectors.toList());
+        // return projectRepository.findProjectManagerId(id);
     }
 }

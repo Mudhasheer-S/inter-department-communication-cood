@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.example.inner_department_communication_backend.DTO.ProjectDTO;
 import com.example.inner_department_communication_backend.DTO.ProjectManagerResponseDTO;
 import com.example.inner_department_communication_backend.model.Image;
 import com.example.inner_department_communication_backend.model.Project;
@@ -113,7 +114,7 @@ public ResponseEntity<Void> assignManagerToProject(
     }
 
     @GetMapping("/getManagerProjects/{id}")
-    public List<Project> getManagerProjects(@PathVariable int id) {
+    public List<ProjectDTO> getManagerProjects(@PathVariable Long id) {
         return projectService.getManagerProjects(id);
     }
 

@@ -16,7 +16,10 @@ export default function ProjectList({ onSelectProject }) {
         const response = await axios.get(`http://localhost:8080/getManagerProjects/${id}`);
         if (Array.isArray(response.data)) {
           setProjects(response.data);
+          console.log("if:",response.data);
         } else {
+          console.log("else:",response.data);
+         
           setError('Unexpected data format');
         }
       } catch (err) {

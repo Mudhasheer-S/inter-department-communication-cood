@@ -28,28 +28,30 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
      "    HAVING COUNT(DISTINCT p2.department_id) > 1" +
      ") " +
      "AND p.department_id = (SELECT id FROM register WHERE department_name = ?1)",
-nativeQuery = true)
-List<Project> findProjectsInLocationsWithMultipleDepartments(String department);
+     nativeQuery = true)
+     List<Project> findProjectsInLocationsWithMultipleDepartments(String department);
 
 
 
 
-@Transactional
-@Query(value = "SELECT p.* FROM project p " +
-               "JOIN priority pr ON p.department_id = pr.department_id " +
-               "WHERE p.location_lon = (SELECT location_lon FROM project WHERE id = ?1) " +
-               "AND p.location_lat = (SELECT location_lat FROM project WHERE id = ?1) " +
-               "ORDER BY pr.priority ASC," +
-               "p.start_date", nativeQuery = true)
-public List<Project> getProjectWithSameLocation(Long id);
+     @Transactional
+     @Query(value = "SELECT p.* FROM project p " +
+                    "JOIN priority pr ON p.department_id = pr.department_id " +
+                    "WHERE p.location_lon = (SELECT location_lon FROM project WHERE id = ?1) " +
+                    "AND p.location_lat = (SELECT location_lat FROM project WHERE id = ?1) " +
+                    "ORDER BY pr.priority ASC," +
+                    "p.start_date", nativeQuery = true)
+     public List<Project> getProjectWithSameLocation(Long id);
 
 
 
 
-Optional<Project> findById(Long id);
+     Optional<Project> findById(Long id);
 
-@Transactional
-@Query(value = "SELECT p.* FROM project p where project_manager_id=?1", nativeQuery = true)
-public List<Project> findProjectManagerId(Long id);
+     @Transactional
+     @Query(value = "SELECT p.* FROM project p where project_manager_id=?1", nativeQuery = true)
+     public List<Project> findProjectManagerId(Long id);
+
+     List<Project> findBySiteEngineer(String siteEngineer);
 
 }

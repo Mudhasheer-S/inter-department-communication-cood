@@ -4,11 +4,13 @@ import { FaLocationDot } from "react-icons/fa6";
 import { SlCalender } from "react-icons/sl";
 import { PiClockCountdownFill } from "react-icons/pi";
 import { IoReturnUpBack } from "react-icons/io5";
+import { useSelector } from 'react-redux';
 
-const DepartmentProjects = ({ departmentName,location, onBack }) => {
+const DepartmentProjects = ({ departmentName,location,role, onBack }) => {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
 
   useEffect(() => {
     if (!departmentName) return;
@@ -17,7 +19,7 @@ const DepartmentProjects = ({ departmentName,location, onBack }) => {
       setLoading(true);
       setError(null);
       try {
-        const response = await axios.get(`http://localhost:8080/get-project/by-department/${departmentName}/${location}`);
+        const response = await axios.get(`http://localhost:8080/get-project/by-department/${departmentName}/${location}/${role}`);
         setProjects(response.data);
       } catch (err) {
         console.error("Error fetching projects:", err);

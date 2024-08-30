@@ -1,5 +1,5 @@
 import React from 'react'
-import ProjectManagerNavbar from './ProjectManagerNavbar'
+import ProjectManagerNavbar from './projectManagerNavbar'
 
 
 

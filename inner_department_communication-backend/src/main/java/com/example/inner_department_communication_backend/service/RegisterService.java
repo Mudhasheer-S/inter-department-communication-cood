@@ -40,7 +40,7 @@ public class RegisterService {
 
     //get
 
-    public List<String> getDepartmentNamesExcluding(String departmentName,String location) {
-        return registerRepository.findDepartmentNamesExcluding(departmentName,location);
+    public List<String> getDepartmentNamesExcluding(String departmentName,String location,String role) {
+        return registerRepository.findDepartmentNamesExcluding(departmentName,location,role);
     }
 }

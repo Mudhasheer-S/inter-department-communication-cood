@@ -8,6 +8,8 @@ const Navbar = () => {
   const [showModal, setShowModal] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const departmentName = useSelector((state) => state.department.name);
+  const location = useSelector((state) => state.department.location);
+
   const navigate = useNavigate();
 
   const toggleMenu = () => {
@@ -33,7 +35,7 @@ const Navbar = () => {
     <nav className="bg-[#1d342e] text-white p-4">
       <div className="container mx-auto flex justify-between items-center">
         <div className="text-2xl font-bold">
-          <h2>{departmentName}</h2>
+          <h2>{location}-{departmentName}</h2>
         </div>
         <button
           onClick={toggleMenu}

@@ -6,15 +6,21 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.inner_department_communication_backend.DTO.ProjectDTO;
 import com.example.inner_department_communication_backend.model.Project;
 import com.example.inner_department_communication_backend.model.Register;
 
+@Repository
 public interface ProjectRepository extends JpaRepository<Project, Long> {
      List<Project> findByDepartment(Register department);
 
-     @Query(value = "SELECT p.* FROM Project p " +
+
+     @Query(value = "SELECT p.name, p.description, p.start_date ,p.id , p.location_name " +
+     "FROM Project p " +
      "WHERE p.location_lat IN (" +
      "    SELECT p1.location_lat FROM Project p1 " +
      "    GROUP BY p1.location_lat " +
@@ -25,21 +31,25 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
      "    GROUP BY p2.location_lon " +
      "    HAVING COUNT(DISTINCT p2.department_id) > 1" +
      ") " +
-     "AND p.department_id=(SELECT id FROM register WHERE department_name = ?1 and location=?2)",
+     "AND p.department_id = (SELECT id FROM register WHERE department_name = ?1 AND location = ?2)",
 nativeQuery = true)
-List<Project> findProjectsInLocationsWithMultipleDepartments(String department,String location);
+List<Object[]> findProjectsInLocationsWithMultipleDepartments(String department, String location);
+
+
 
 
 
 
 @Transactional
-@Query(value = "SELECT p.* FROM project p " +
+@Query(value = "SELECT p.id, p.name, p.description, p.start_date, p.location_name, p.status, r.department_name " +
+               "FROM project p " +
                "JOIN register r ON p.department_id = r.id " +
                "JOIN priority pr ON r.department_name = pr.department " +
                "WHERE p.location_lon = (SELECT location_lon FROM project WHERE id = ?1) " +
                "AND p.location_lat = (SELECT location_lat FROM project WHERE id = ?1) " +
                "ORDER BY pr.priority ASC, p.start_date", nativeQuery = true)
-public List<Project> getProjectWithSameLocation(Long id);
+public List<Object[]> getProjectWithSameLocation(Long id);
+
 
 
 

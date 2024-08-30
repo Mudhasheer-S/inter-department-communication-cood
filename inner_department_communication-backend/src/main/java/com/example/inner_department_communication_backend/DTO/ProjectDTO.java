@@ -21,6 +21,7 @@ public class ProjectDTO {
     private String startDate;
     private String duration;
     private String access;
+    private String departmentName;
 
     private ProjectManagerResponseDTO projectManager; 
 }

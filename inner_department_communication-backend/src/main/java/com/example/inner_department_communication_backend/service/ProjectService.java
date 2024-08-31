@@ -75,47 +75,6 @@ public class ProjectService {
         try {
             List<Object[]> results = projectRepository.findProjectsInLocationsWithMultipleDepartments(department,
                     location);
-            return results.stream().map(result -> {
-                ProjectDTO dto = new ProjectDTO();
-                dto.setName((String) result[0]);
-                dto.setDescription((String) result[1]);
-                dto.setStartDate((String) result[2]);
-                dto.setId((Long) result[3]);
-                dto.setLocationName((String) result[4]);
-                return dto;
-            }).collect(Collectors.toList());
-        } catch (Exception e) {
-            // Log exception
-            e.printStackTrace();
-            throw new RuntimeException("Error fetching projects", e);
-        }
-    }
-
-    public List<ProjectDTO> getProjectWithSameLocation(Long id) {
-        try {
-            List<Object[]> results = projectRepository.getProjectWithSameLocation(id);
-
-            return results.stream().map(result -> {
-                ProjectDTO dto = new ProjectDTO();
-                dto.setId((Long) result[0]);
-                dto.setName((String) result[1]);
-                dto.setDescription((String) result[2]);
-                dto.setStartDate((String) result[3]);
-                dto.setLocationName((String) result[4]);
-                dto.setStatus((String) result[5]);
-                dto.setDepartmentName((String) result[6]);
-                return dto;
-            }).collect(Collectors.toList());
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException("Error fetching projects", e);
-        }
-    }
-
-    public List<ProjectDTO> getProjectsInLocationsWithMultipleDepartments(String department, String location) {
-        try {
-            List<Object[]> results = projectRepository.findProjectsInLocationsWithMultipleDepartments(department,
-                    location);
             System.out.print("------------------------------**********************************************" + results);
             return results.stream().map(result -> {
                 ProjectDTO dto = new ProjectDTO();

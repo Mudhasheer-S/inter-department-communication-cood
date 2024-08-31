@@ -27,31 +27,28 @@ public class RegisterService {
         }
     }
 
-
-     
     public String loginAndGetDepartmentName(String email, String password) {
         Optional<Register> optionalRegister = registerRepository.findByEmail(email);
         if (optionalRegister.isPresent()) {
             Register register = optionalRegister.get();
             if (register.getPassword().equals(password)) {
-                return register.getDepartmentName()+"#"+register.getRole()+"#"+register.getLocation()+"#"+register.getId();
+                return register.getDepartmentName() + "#" + register.getRole() + "#" + register.getLocation() + "#"
+                        + register.getId();
             }
         }
         Optional<SiteEngineer> optionalRegisterSite = Optional.ofNullable(siteEngineerService.getDetails(email));
         if (optionalRegisterSite.isPresent()) {
             SiteEngineer register = optionalRegisterSite.get();
             if (register.getPassword().equals(password)) {
-                return register.getDepartmentName()+"#siteEngineer#"+register.getLocation()+"#";
+                return register.getDepartmentName() + "#siteEngineer#" + register.getLocation() + "#";
             }
         }
         return null;
     }
 
+    // get
 
-
-    //get
-
-    public List<String> getDepartmentNamesExcluding(String departmentName,String location) {
-        return registerRepository.findDepartmentNamesExcluding(departmentName,location);
+    public List<String> getDepartmentNamesExcluding(String departmentName, String location) {
+        return registerRepository.findDepartmentNamesExcluding(departmentName, location);
     }
 }

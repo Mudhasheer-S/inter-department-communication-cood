@@ -29,8 +29,6 @@ import SiteEngineerHome from "./components/sitengineer/siteEngineerHome";
 import DailyProgressReport from "./components/sitengineer/DailyProgressReport";
 import PublicDepts from "./components/public/PublicDepts";
 import PublicReport from "./components/public/publicReport";
-import SiteEngineerHome from "./components/sitengineer/siteEngineerHome";
-import DailyProgressReport from "./components/sitengineer/DailyProgressReport";
 
 function App() {
   // const MainLayout = () => {
@@ -70,15 +68,6 @@ function App() {
           <Route path="/show-depts" element={<PublicDepts />} />
           <Route path="/public" element={<PublicReport />} />
           <Route path="/intersectDetails/:id" element={<IntersectDetails />} />
-
-          <Route
-            path="/siteEngineer/alldepartment"
-            element={<SiteEngineerHome />}
-          />
-          <Route
-            path="/siteEngineer/report"
-            element={<DailyProgressReport />}
-          />
 
           <Route
             path="/siteEngineer/alldepartment"

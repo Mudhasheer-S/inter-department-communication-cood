@@ -78,6 +78,10 @@ public class ProjectManagerService {
     public ProjectManager projectManagerLogin(String email,String password)
     {
         List<ProjectManager> projectManager = projectManagerRepository.findByEmailAndPassword(email,password);
-        return projectManager.get(0);
+
+        if(!projectManager.isEmpty())
+            return projectManager.get(0);
+        else
+            return null;
     }
 }

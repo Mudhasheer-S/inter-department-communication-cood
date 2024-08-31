@@ -11,17 +11,31 @@ import java.util.List;
 
 @Service
 public class SiteEngineerService {
-    
+
     @Autowired
     private SiteEngineerRepo siteEngineerRepo;
     @Autowired
     private ProjectRepository projectRepository;
 
-    public SiteEngineer getDetails(String email){
+    public SiteEngineer getDetails(String email) {
         return siteEngineerRepo.findById(email).orElse(null);
     }
 
-    public List<Project> getProjectForSite(String email){
+    public List<SiteEngineer> getAllEngineer() {
+        return siteEngineerRepo.findAll();
+    }
+
+    public List<Project> getProjectForSite(String email) {
         return projectRepository.findBySiteEngineer(email);
+    }
+
+    public void updateSiteEngineer(String email, Long id) {
+
+        Project project = projectRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Project not found"));
+
+        project.setSiteEngineer(email);
+
+        projectRepository.save(project);
     }
 }

@@ -25,6 +25,8 @@ import IntersectDetails from "./components/IntersectDetails";
 import ProjectManagerLogin from "./components/projectManager/projectManagerLogin";
 import ProjectManagerDashboard from "./components/projectManager/projectManagerDashboard";
 import ProjectMnagerResources from "./components/projectManager/projectMnagerResources";
+import SiteEngineerHome from "./components/sitengineer/siteEngineerHome";
+import DailyProgressReport from "./components/sitengineer/DailyProgressReport";
 import PublicDepts from "./components/public/PublicDepts";
 import PublicReport from "./components/public/publicReport";
 
@@ -66,6 +68,15 @@ function App() {
           <Route path="/show-depts" element={<PublicDepts />} />
           <Route path="/public" element={<PublicReport />} />
           <Route path="/intersectDetails/:id" element={<IntersectDetails />} />
+
+          <Route
+            path="/siteEngineer/alldepartment"
+            element={<SiteEngineerHome />}
+          />
+          <Route
+            path="/siteEngineer/report"
+            element={<DailyProgressReport />}
+          />
         </Routes>
       </Router>
     </>

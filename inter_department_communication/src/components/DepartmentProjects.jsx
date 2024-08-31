@@ -4,11 +4,13 @@ import { FaLocationDot } from "react-icons/fa6";
 import { SlCalender } from "react-icons/sl";
 import { PiClockCountdownFill } from "react-icons/pi";
 import { IoReturnUpBack } from "react-icons/io5";
+import { useSelector } from 'react-redux';
 
 const DepartmentProjects = ({ departmentName,location, onBack }) => {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
 
   useEffect(() => {
     if (!departmentName) return;

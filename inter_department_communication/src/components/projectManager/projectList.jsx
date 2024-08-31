@@ -15,11 +15,12 @@ export default function ProjectList({ onSelectProject }) {
         setLoading(true);
         const response = await axios.get(`http://localhost:8080/getManagerProjects/${id}`);
         if (Array.isArray(response.data)) {
-          setProjects(response.data);
-          console.log("if:",response.data);
+          // Filter out projects with status 'completed'
+          const filteredProjects = response.data.filter(project => project.status !== 'completed');
+          setProjects(filteredProjects);
+          console.log("Filtered projects:", filteredProjects);
         } else {
-          console.log("else:",response.data);
-         
+          console.log("Unexpected data format:", response.data);
           setError('Unexpected data format');
         }
       } catch (err) {
@@ -31,7 +32,7 @@ export default function ProjectList({ onSelectProject }) {
     };
 
     fetchProjects();
-  }, [projectManagerId]);
+  }, [id]); // Make sure to use 'id' in dependency array
 
   if (loading) return <div className="text-center text-gray-500">Loading projects...</div>;
 

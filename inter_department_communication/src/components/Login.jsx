@@ -6,6 +6,7 @@ import axios from "axios";
 import ugov from "../assets/urban_gov.png";
 
 import { useNavigate } from "react-router-dom";
+import { setsiteEngineerEmail, setsiteEngineerName } from "../Redux/siteEngineerSlice";
 
 
 export default function Login() {
@@ -47,6 +48,12 @@ export default function Login() {
         dispatch(setDepartmentName(departmentName));
         dispatch(setDepartmentLocation(location));
         dispatch(setDepartmentRole(role));
+
+        if(role == "siteEngineer"){
+            const siteres = await axios.get(`http://localhost:8080/site/engineer/${formData.email}`);
+            dispatch(setsiteEngineerEmail(formData.email));
+            dispatch(setsiteEngineerName(siteres.data.name));
+        }
         
         setMessage("Login Successful.");
         navigate(`${role}/alldepartment`);

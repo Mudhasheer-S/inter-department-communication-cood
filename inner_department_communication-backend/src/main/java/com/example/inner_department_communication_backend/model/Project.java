@@ -39,6 +39,7 @@ public class Project {
     private String startDate;
     private String duration;
     private String access;
+    private String siteEngineer;
     private String endDate;
     private double cost;
 

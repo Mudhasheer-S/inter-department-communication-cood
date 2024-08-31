@@ -76,6 +76,7 @@ const MyDepartment = () => {
   // Filter projects into ongoing and upcoming
   const ongoingProjects = projects.filter(project => project.status === 'ongoing');
   const upcomingProjects = projects.filter(project => project.status === 'upcoming');
+  const completedProjects = projects.filter(project => project.status === 'completed');
 
 
   ////assign
@@ -247,6 +248,71 @@ const MyDepartment = () => {
           ))}
         </div>
       )}
+
+
+
+
+{completedProjects.length > 0 && (
+        <div className="mt-12">
+          <h2 className="text-3xl font-semibold mb-6 text-gray-800">Completed Projects</h2>
+          {completedProjects.map((project) => (
+            <div key={project.name} className="bg-white shadow-lg rounded-lg p-8 mb-8 transition-transform transform hover:-translate-y-2 hover:shadow-xl duration-300">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-2xl font-semibold text-gray-900">{project.name}</h3>
+                <p className={`text-sm font-medium ${project.access === 'public' ? 'text-green-600' : 'text-red-600'} italic`}>
+                  {project.access === 'public' ? 'Public' : 'Private'}
+                </p>
+              </div>
+              <p className="text-gray-700 mb-6 leading-relaxed">{project.description}</p>
+              <div className="flex items-center text-gray-600 space-x-6">
+                <div className="flex items-center">
+                  <FaLocationDot className="mr-2 text-green-700" />
+                  <span>{project.locationName}</span>
+                </div>
+                <div className="flex items-center">
+                  <SlCalender className="mr-2 text-green-700" />
+                  <span>{formatDate(project.startDate)}</span>
+                </div>
+                <div className="flex items-center">
+                  <PiClockCountdownFill className="mr-2 text-green-700" />
+                  <span>{project.duration}</span>
+                </div>
+              </div>
+
+
+              {project.projectManager ? (
+                <div
+                  className="absolute bottom-4 right-4 flex items-center space-x-2"
+                  onMouseEnter={() => setHoveredProject(project.name)}
+                  onMouseLeave={() => setHoveredProject(null)}
+                >
+                  <img
+                    src={pm}
+                    alt={project.projectManager.name}
+                    className="w-9 h-9 rounded-full border-2 border-white shadow-lg cursor-pointer"
+                  />
+                  {hoveredProject === project.name &&  (
+                    <div className="absolute bottom-12 right-0 bg-gray-600 text-white text-sm rounded-lg shadow-lg p-2 z-10 flex items-center space-x-2">
+                      <span>{project.projectManager.name}</span>
+                      <FaEnvelope className="text-blue-400" />
+                      <span>{project.projectManager.email}</span>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <button
+                  onClick={() => handleAssignClick(project)}
+                  className="absolute bottom-4 right-4 bg-[#055A43] text-white px-4 py-2 rounded-full shadow-md hover:bg-[#00392B] transition duration-300"
+                >
+                  Assign
+                </button>
+              )}
+
+
+            </div>
+          ))}
+        </div>
+)}
 
 
 

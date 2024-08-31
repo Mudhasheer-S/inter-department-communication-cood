@@ -25,7 +25,7 @@ export default function ProjectManagerNavbar() {
     <nav className="bg-[#1d342e] text-white p-4">
       <div className="container mx-auto flex justify-between items-center">
         <div className="text-2xl font-bold">
-          <h2>Hi! {projectManagerName}</h2>
+          <h2>Welcome, {projectManagerName}!</h2>
         </div>
         <button
           onClick={toggleMenu}

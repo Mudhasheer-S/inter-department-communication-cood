@@ -43,7 +43,7 @@ export default function ProjectList({ onSelectProject }) {
   return (
     <div>
       <h1 className="text-3xl font-bold text-center mb-8">All Projects</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div className="grid ml-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {projects.map((project) => (
           <div
             key={project.id} // Use a unique identifier if available

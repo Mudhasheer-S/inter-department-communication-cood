@@ -41,7 +41,7 @@ List<Object[]> findProjectsInLocationsWithMultipleDepartments(String department,
 
 
 @Transactional
-@Query(value = "SELECT p.id, p.name, p.description, p.start_date, p.location_name, p.status, r.department_name " +
+@Query(value = "SELECT p.id, p.name, p.description, p.start_date, p.location_name, p.status, r.department_name,p.site_engineer " +
                "FROM project p " +
                "JOIN register r ON p.department_id = r.id " +
                "JOIN priority pr ON r.department_name = pr.department " +
@@ -55,7 +55,7 @@ public List<Object[]> getProjectWithSameLocation(Long id);
 
 
 
-     Optional<Project> findById(Long id);
+     Optional<Project> findById(int id);
 
      @Transactional
      @Query(value = "SELECT p.* FROM project p where project_manager_id=?1", nativeQuery = true)

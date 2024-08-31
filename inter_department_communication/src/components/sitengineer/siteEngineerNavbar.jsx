@@ -25,7 +25,7 @@ export default function SiteEngineerNavbar() {
     <nav className="bg-[#1d342e] text-white p-4">
       <div className="container mx-auto flex justify-between items-center">
         <div className="text-2xl font-bold">
-          <h2>Hi! {siteEngineerName}</h2>
+          <h2>Welcome, {siteEngineerName}!</h2>
         </div>
         <button
           onClick={toggleMenu}

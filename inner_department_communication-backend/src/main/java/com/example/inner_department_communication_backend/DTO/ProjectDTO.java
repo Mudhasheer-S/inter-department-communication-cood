@@ -22,6 +22,7 @@ public class ProjectDTO {
     private String duration;
     private String access;
     private String departmentName;
+    private String siteEngineer;
 
     private ProjectManagerResponseDTO projectManager; 
 }

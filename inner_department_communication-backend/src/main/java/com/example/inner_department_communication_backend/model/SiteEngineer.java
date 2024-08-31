@@ -12,6 +12,8 @@ public class SiteEngineer {
     private String email;
 
     private String name;
+    private String departmentName;
     private String phone;
-
+    private String password;
+    private String location;
 }

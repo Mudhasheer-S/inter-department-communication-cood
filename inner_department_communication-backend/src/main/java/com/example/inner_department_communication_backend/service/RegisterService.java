@@ -7,12 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.inner_department_communication_backend.model.Register;
+import com.example.inner_department_communication_backend.model.SiteEngineer;
 import com.example.inner_department_communication_backend.repo.RegisterRepository;
 
 @Service
 public class RegisterService {
-      @Autowired
+    @Autowired
     private RegisterRepository registerRepository;
+
+    @Autowired
+    private SiteEngineerService siteEngineerService;
 
     public boolean registerUser(Register register) {
         try {
@@ -31,6 +35,13 @@ public class RegisterService {
             Register register = optionalRegister.get();
             if (register.getPassword().equals(password)) {
                 return register.getDepartmentName()+"#"+register.getRole()+"#"+register.getLocation()+"#"+register.getId();
+            }
+        }
+        Optional<SiteEngineer> optionalRegisterSite = Optional.ofNullable(siteEngineerService.getDetails(email));
+        if (optionalRegisterSite.isPresent()) {
+            SiteEngineer register = optionalRegisterSite.get();
+            if (register.getPassword().equals(password)) {
+                return register.getDepartmentName()+"#siteEngineer#"+register.getLocation()+"#";
             }
         }
         return null;

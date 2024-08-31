@@ -11,6 +11,11 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import java.util.List;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+
 
 
 
@@ -30,6 +35,15 @@ public class SiteEngineerController {
     public List<Project> getMethodProject(@PathVariable String email) {
         return siteEngineerService.getProjectForSite(email);
     }
+
+    @GetMapping("/site/engineer/all")
+    public List<SiteEngineer> getAllSiteEngineer() {
+        return siteEngineerService.getAllEngineer();
+    }
     
+    @PostMapping("/assign-exist-engineer/{email}/{id}")
+    public void postMethodName(@PathVariable String email,@PathVariable("id") Long project_id) {       
+        siteEngineerService.updateSiteEngineer(email,project_id);
+    }
     
 }

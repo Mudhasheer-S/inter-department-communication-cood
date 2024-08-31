@@ -79,6 +79,7 @@ public class ProjectService {
     public List<ProjectDTO> getProjectsInLocationsWithMultipleDepartments(String department, String location) {
         try {
             List<Object[]> results = projectRepository.findProjectsInLocationsWithMultipleDepartments(department, location);
+            System.out.print("------------------------------**********************************************"+results);
             return results.stream().map(result -> {
                 ProjectDTO dto = new ProjectDTO();
                 dto.setName((String) result[0]);
@@ -98,6 +99,7 @@ public class ProjectService {
     public List<ProjectDTO> getProjectWithSameLocation(Long id) {
         try {
             List<Object[]> results = projectRepository.getProjectWithSameLocation(id);
+
             
             return results.stream().map(result -> {
                 ProjectDTO dto = new ProjectDTO();
@@ -108,6 +110,7 @@ public class ProjectService {
                 dto.setLocationName((String) result[4]);
                 dto.setStatus((String) result[5]);
                 dto.setDepartmentName((String) result[6]);
+                // dto.setSiteEngineer((String) result[7]);
                 return dto;
             }).collect(Collectors.toList());
         } catch (Exception e) {
@@ -147,6 +150,7 @@ public class ProjectService {
         dto.setStartDate(project.getStartDate());
         dto.setDuration(project.getDuration());
         dto.setAccess(project.getAccess());
+        dto.setSiteEngineer(project.getSiteEngineer());
 
         // Set Project Manager if present
     ProjectManager manager = project.getProjectManager();

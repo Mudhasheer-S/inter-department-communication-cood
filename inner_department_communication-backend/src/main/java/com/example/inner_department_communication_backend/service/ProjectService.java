@@ -102,6 +102,15 @@ public class ProjectService {
         return Collections.emptyList();
     }
 
+    public List<ProjectDTO> getByLocation(String locationName) {
+        List<Project> projects = projectRepository.findByLocationName(locationName);
+        return projects.stream()
+                       .map(this::convertToDTO)
+                       .collect(Collectors.toList());
+    }
+
+
+
     private ProjectDTO convertToDTO(Project project) 
     {
         ProjectDTO dto = new ProjectDTO();

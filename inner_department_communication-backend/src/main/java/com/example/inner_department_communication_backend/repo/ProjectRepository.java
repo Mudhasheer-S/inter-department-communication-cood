@@ -13,6 +13,8 @@ import com.example.inner_department_communication_backend.model.Register;
 
 public interface ProjectRepository extends JpaRepository<Project, Long> {
      List<Project> findByDepartment(Register department);
+     List<Project> findByLocationName(String locationName);
+
 
      @Query(value = "SELECT p.* FROM Project p " +
      "WHERE p.location_lat IN (" +
@@ -42,7 +44,6 @@ List<Project> findProjectsInLocationsWithMultipleDepartments(String department);
                "ORDER BY pr.priority ASC," +
                "p.start_date", nativeQuery = true)
 public List<Project> getProjectWithSameLocation(Long id);
-
 
 
 

@@ -1,5 +1,8 @@
 package com.example.inner_department_communication_backend.controller;
 
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +39,7 @@ public class ProjectController {
         }
     }
 
- @GetMapping("get-project/by-department/{departmentName}/{location}")
+    @GetMapping("get-project/by-department/{departmentName}/{location}")
     public ResponseEntity<List<ProjectDTO>> getProjectsByDepartmentName(
             @PathVariable String departmentName,@PathVariable String location) {
         List<ProjectDTO> projectDTOs = projectService.getProjectsByDepartmentName(departmentName,location);
@@ -44,6 +47,19 @@ public class ProjectController {
             return ResponseEntity.noContent().build(); // 204 No Content if no projects found
         }
         return ResponseEntity.ok(projectDTOs); // 200 OK with the list of ProjectDTOs
+    }
+
+    @GetMapping("/getByLocation/{locationName}")
+    public ResponseEntity<List<ProjectDTO>> getByLocation(@PathVariable String locationName){
+        List<ProjectDTO> projects = projectService.getByLocation(locationName);
+        if(projects == null) {
+            projects = new ArrayList<>(); // Ensure it's an empty array, not null
+        }
+        if(projects.isEmpty())
+        {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(projects);
     }
 
     @GetMapping("/intersecting-departments/{department}")
@@ -55,4 +71,5 @@ public class ProjectController {
     public List<Project> getProjectsWithSameLocation(@PathVariable Long id) {
         return projectService.getProjectWithSameLocation(id);
     }
+
 }

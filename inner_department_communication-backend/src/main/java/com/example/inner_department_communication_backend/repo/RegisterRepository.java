@@ -13,8 +13,6 @@ public interface RegisterRepository extends JpaRepository<Register, Long> {
     Optional<Register> findByEmail(String email);
     // Register findByName(String name);
     Optional<Register> findByDepartmentNameAndLocation(String departmentName, String location);
-    
-
     @Query("SELECT r.departmentName FROM Register r WHERE r.departmentName <> :departmentName AND r.location = :location")
     List<String> findDepartmentNamesExcluding(@Param("departmentName") String departmentName,@Param("location") String location);
 }

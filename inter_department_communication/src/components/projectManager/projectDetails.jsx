@@ -42,7 +42,7 @@ export default function ProjectDetails({ project, onBack, onMarkComplete }) {
       <div className="flex justify-between mt-8">
         <button
           onClick={onMarkComplete}
-          className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors"
+          className="px-4 py-2 bg-black text-white rounded hover:bg-green-600 transition-colors"
         >
           Mark as Completed
         </button>
@@ -75,7 +75,7 @@ export default function ProjectDetails({ project, onBack, onMarkComplete }) {
         ) : (
           <button
             onClick={handleOpenAssignEngineer}
-            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
+            className="px-4 py-2 bg-black text-white rounded hover:bg-blue-600 transition-colors"
             style={{ position: "absolute", right: "16px", bottom: "16px" }}
           >
             Assign Site Engineer

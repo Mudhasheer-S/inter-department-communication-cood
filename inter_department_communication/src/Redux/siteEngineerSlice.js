@@ -17,9 +17,15 @@ export const siteEngineerSlice = createSlice({
       state.name = action.payload;
       sessionStorage.setItem('siteEngineerName', action.payload);
     },
+    logout: (state) => {
+      state.email = '';
+      state.name = '';
+      sessionStorage.removeItem('siteEngineerEmail');
+      sessionStorage.removeItem('siteEngineerName');
+    },
   },
 });
 
-export const { setsiteEngineerEmail, setsiteEngineerName } = siteEngineerSlice.actions;
+export const { setsiteEngineerEmail, setsiteEngineerName,logout } = siteEngineerSlice.actions;
 
 export default siteEngineerSlice.reducer;

@@ -75,7 +75,6 @@ public class ProjectService {
         try {
             List<Object[]> results = projectRepository.findProjectsInLocationsWithMultipleDepartments(department,
                     location);
-            System.out.print("------------------------------**********************************************" + results);
             return results.stream().map(result -> {
                 ProjectDTO dto = new ProjectDTO();
                 dto.setName((String) result[0]);

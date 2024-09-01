@@ -38,7 +38,7 @@ const DepartmentProjects = ({ departmentName,location, onBack }) => {
   };
 
   return (
-    <div className="max-w-screen-xl mx-auto">
+    <div className="max-w-screen-xl mx-auto mt-8">
       <button
         onClick={onBack} // Use the passed onBack function to handle navigation
         className="mb-1 px-3 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors"

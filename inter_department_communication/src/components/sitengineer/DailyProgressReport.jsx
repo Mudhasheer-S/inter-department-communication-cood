@@ -164,13 +164,13 @@ function DailyProgressReport() {
         <button
           type="button"
           onClick={addWorkerRow}
-          className="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 "
+          className="mt-4 bg-black text-white px-4 py-2 rounded"
           >
           Add Worker
         </button>
         <button
           type="submit"
-          className="mt-4 ml-4 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+          className="mt-4 ml-4 bg-black text-white px-4 py-2 rounded-md"
           >
           Submit
         </button>

@@ -4,8 +4,6 @@ import { IoLogOutOutline, IoNotifications } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import { useDispatch } from 'react-redux';
 import { logout } from "../Redux/departmentSlice";
-// import { logout } from './redux/departmentSlice';
-
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,7 +12,6 @@ const Navbar = () => {
   const departmentName = useSelector((state) => state.department.name);
   const location = useSelector((state) => state.department.location);
   const dispatch = useDispatch();
-
 
   const navigate = useNavigate();
 
@@ -31,22 +28,20 @@ const Navbar = () => {
   };
 
   const handleLogout = () => {
-    // Perform logout logic here
-    // e.g., clear tokens, update state, redirect to login page
     dispatch(logout());
     console.log("User logged out");
     navigate("/"); // Redirect to login page
   };
 
   return (
-    <nav className="bg-[#1d342e] text-white p-4">
+    <nav className="bg-white text-black p-4 shadow-md">
       <div className="container mx-auto flex justify-between items-center">
         <div className="text-2xl font-bold">
-          <h2>{location}-{departmentName}</h2>
+          <h2>{location} - {departmentName}</h2>
         </div>
         <button
           onClick={toggleMenu}
-          className="block lg:hidden px-3 py-2 border border-gray-700 rounded text-gray-300 hover:text-white hover:border-white focus:outline-none"
+          className="block lg:hidden px-3 py-2 border border-gray-400 rounded text-gray-800 hover:text-black hover:border-black focus:outline-none"
         >
           <svg
             className="w-6 h-6"
@@ -68,11 +63,11 @@ const Navbar = () => {
             isOpen ? "block" : "hidden"
           }`}
         >
-          <ul className="lg:flex ">
+          <ul className="lg:flex">
             <li>
               <Link
                 to="/head/alldepartment"
-                className="block px-4 py-2 text-gray-300 hover:bg-gray-700 rounded"
+                className="block px-4 py-2 text-black hover:bg-gray-100 rounded"
               >
                 Home
               </Link>
@@ -80,7 +75,7 @@ const Navbar = () => {
             <li>
               <Link
                 to="/head/alldepartment"
-                className="block px-4 py-2 text-gray-300 hover:bg-gray-700 rounded"
+                className="block px-4 py-2 text-black hover:bg-gray-100 rounded"
               >
                 All Departments
               </Link>
@@ -88,7 +83,7 @@ const Navbar = () => {
             <li>
               <Link
                 to="/mydepartment"
-                className="block px-4 py-2 text-gray-300 hover:bg-gray-700 rounded"
+                className="block px-4 py-2 text-black hover:bg-gray-100 rounded"
               >
                 My Department
               </Link>
@@ -96,7 +91,7 @@ const Navbar = () => {
             <li>
               <Link
                 to="/intersectDept"
-                className="block px-4 py-2 text-gray-300 hover:bg-gray-700 rounded"
+                className="block px-4 py-2 text-black hover:bg-gray-100 rounded"
               >
                 Overlapping Projects
               </Link>
@@ -106,20 +101,20 @@ const Navbar = () => {
               onMouseLeave={handleMouseLeave}
               className="relative"
             >
-              <span className="block px-4 pt-2 text-gray-300 hover:bg-gray-700 rounded cursor-pointer">
+              <span className="block px-4 pt-2 text-black hover:bg-gray-100 rounded cursor-pointer">
                 Collaboration
               </span>
               {isDropdownOpen && (
-                <div className="absolute left-0 mt-2 w-48 bg-gray-800 rounded shadow-lg">
+                <div className="absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded shadow-lg">
                   <Link
                     to="/interdepartment"
-                    className="block px-4 py-2 text-gray-300 hover:bg-gray-700 rounded"
+                    className="block px-4 py-2 text-black hover:bg-gray-100 rounded"
                   >
                     Interdepartment
                   </Link>
                   <Link
                     to="/intradepartment"
-                    className="block px-4 py-2 text-gray-300 hover:bg-gray-700 rounded"
+                    className="block px-4 py-2 text-black hover:bg-gray-100 rounded"
                   >
                     Intradepartment
                   </Link>
@@ -129,7 +124,7 @@ const Navbar = () => {
             <li>
               <Link
                 to="/notification"
-                className="block px-4 py-3 text-gray-300 hover:bg-gray-700 rounded"
+                className="block px-4 py-3 text-black hover:bg-gray-100 rounded"
               >
                 <IoNotifications />
               </Link>
@@ -137,7 +132,7 @@ const Navbar = () => {
             <li>
               <button
                 onClick={() => setShowModal(true)}
-                className="fixed bottom-4 right-4 bg-red-600 text-white p-4 rounded-full shadow-lg hover:bg-red-700"
+                className="fixed bottom-4 right-4 bg-black text-white p-4 rounded-full shadow-lg hover:bg-gray-800"
                 title="Logout"
               >
                 <IoLogOutOutline size={24} />
@@ -147,7 +142,7 @@ const Navbar = () => {
           {showModal && (
             <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
               <div className="bg-white p-6 rounded shadow-lg">
-                <h2 className="text-slate-950 font-semibold mb-4">
+                <h2 className="text-black font-semibold mb-4">
                   Are you sure you want to logout?
                 </h2>
                 <button

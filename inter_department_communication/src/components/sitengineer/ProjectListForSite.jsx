@@ -51,7 +51,7 @@ const ProjectListForSite = () => {
 
   return (
     <div className="max-w-screen-xl mx-auto p-6">
-      <h1 className="text-4xl font-extrabold mb-6 text-center text-green-800">Projects List</h1>
+      <h1 className="text-4xl font-extrabold mb-6 text-center text-black">Projects List</h1>
       <div className="grid grid-rows-1 gap-6">
         {projects.map((project) => (
           <div key={project.id} className="bg-white shadow-lg rounded-lg p-6 relative transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-xl cursor-pointer">

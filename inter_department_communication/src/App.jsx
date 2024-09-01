@@ -27,6 +27,8 @@ import ProjectManagerDashboard from "./components/projectManager/projectManagerD
 import ProjectMnagerResources from "./components/projectManager/projectMnagerResources";
 import SiteEngineerHome from "./components/sitengineer/siteEngineerHome";
 import DailyProgressReport from "./components/sitengineer/DailyProgressReport";
+import PublicDepts from "./components/public/PublicDepts";
+import PublicReport from "./components/public/publicReport";
 
 function App() {
   // const MainLayout = () => {
@@ -43,9 +45,18 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Login />} />
-          <Route path="/project-manager-login" element={<ProjectManagerLogin />} />
-          <Route path="/project-manager" element={<ProjectManagerDashboard />} />
-          <Route path="/project-manager-resources" element={<ProjectMnagerResources />} />
+          <Route
+            path="/project-manager-login"
+            element={<ProjectManagerLogin />}
+          />
+          <Route
+            path="/project-manager"
+            element={<ProjectManagerDashboard />}
+          />
+          <Route
+            path="/project-manager-resources"
+            element={<ProjectMnagerResources />}
+          />
           <Route path="/head/alldepartment" element={<AllDepartments />} />
           <Route path="/notification" element={<Notification />} />
           <Route path="/mydepartment" element={<MyDepartment />} />
@@ -54,10 +65,18 @@ function App() {
           <Route path="/all-projects" element={<AllProjectsPage />} />
           <Route path="/interdepartment" element={<ForumPage />} />
           <Route path="/intersectDept" element={<Intersectdept />} />
+          <Route path="/show-depts" element={<PublicDepts />} />
+          <Route path="/public" element={<PublicReport />} />
           <Route path="/intersectDetails/:id" element={<IntersectDetails />} />
-          
-          <Route path="/siteEngineer/alldepartment" element={<SiteEngineerHome />} />
-          <Route path="/siteEngineer/report" element={<DailyProgressReport/>}/>
+
+          <Route
+            path="/siteEngineer/alldepartment"
+            element={<SiteEngineerHome />}
+          />
+          <Route
+            path="/siteEngineer/report"
+            element={<DailyProgressReport />}
+          />
         </Routes>
       </Router>
     </>

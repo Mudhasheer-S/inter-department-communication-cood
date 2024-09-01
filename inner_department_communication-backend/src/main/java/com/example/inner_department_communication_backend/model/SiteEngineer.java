@@ -7,7 +7,7 @@ import lombok.Data;
 @Entity
 @Data
 public class SiteEngineer {
-    
+
     @Id
     private String email;
 

@@ -1,15 +1,12 @@
 package com.example.inner_department_communication_backend.service;
 
-
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.time.LocalDateTime;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 
 import com.example.inner_department_communication_backend.DTO.ProjectDTO;
 import com.example.inner_department_communication_backend.DTO.ProjectManagerResponseDTO;
@@ -33,31 +30,30 @@ public class ProjectService {
     @Autowired
     private NotificationRepository notificationRepository;
 
-    //post
+    // post
     public Project createProject(Project project, String departmentName, String departmentLocation) {
-        Register department = registerRepository.findByDepartmentNameAndLocation(departmentName,departmentLocation).orElseThrow(() -> new RuntimeException("Department not found"));
+        Register department = registerRepository.findByDepartmentNameAndLocation(departmentName, departmentLocation)
+                .orElseThrow(() -> new RuntimeException("Department not found"));
         if (department != null) {
             project.setDepartment(department);
 
-
-              Project savedProject = projectRepository.save(project);
+            Project savedProject = projectRepository.save(project);
 
             // Check for overlaps and update notifications
             checkAndUpdateNotifications(savedProject);
 
             return savedProject;
         }
-      return null; // Or throw an exception if preferred
+        return null; // Or throw an exception if preferred
     }
 
-
-      private void checkAndUpdateNotifications(Project newProject) {
+    private void checkAndUpdateNotifications(Project newProject) {
         List<Project> allProjects = projectRepository.findAll();
-        
+
         for (Project existingProject : allProjects) {
             if (!existingProject.getId().equals(newProject.getId()) &&
-                existingProject.getLocationLat() == newProject.getLocationLat() &&
-                existingProject.getLocationLon() == newProject.getLocationLon()) {
+                    existingProject.getLocationLat() == newProject.getLocationLat() &&
+                    existingProject.getLocationLon() == newProject.getLocationLon()) {
 
                 createNotification(existingProject, newProject);
                 createNotification(newProject, existingProject);
@@ -71,15 +67,15 @@ public class ProjectService {
         notification.setOverlappingProjectId(overlappingProject.getId());
         notification.setOverlapDateTime(LocalDateTime.now());
         notification.setProject(project);
-        
+
         notificationRepository.save(notification);
     }
 
-
     public List<ProjectDTO> getProjectsInLocationsWithMultipleDepartments(String department, String location) {
         try {
-            List<Object[]> results = projectRepository.findProjectsInLocationsWithMultipleDepartments(department, location);
-            System.out.print("------------------------------**********************************************"+results);
+            List<Object[]> results = projectRepository.findProjectsInLocationsWithMultipleDepartments(department,
+                    location);
+            System.out.print("------------------------------**********************************************" + results);
             return results.stream().map(result -> {
                 ProjectDTO dto = new ProjectDTO();
                 dto.setName((String) result[0]);
@@ -100,7 +96,6 @@ public class ProjectService {
         try {
             List<Object[]> results = projectRepository.getProjectWithSameLocation(id);
 
-            
             return results.stream().map(result -> {
                 ProjectDTO dto = new ProjectDTO();
                 dto.setId((Long) result[0]);
@@ -118,27 +113,28 @@ public class ProjectService {
             throw new RuntimeException("Error fetching projects", e);
         }
     }
-    
 
-
-
-
-
-
-    //get
-    public List<ProjectDTO> getProjectsByDepartmentName(String departmentName,String location) {
-        Register department = registerRepository.findByDepartmentNameAndLocation(departmentName,location).orElseThrow(() -> new RuntimeException("Department not found"));
+    // get
+    public List<ProjectDTO> getProjectsByDepartmentName(String departmentName, String location) {
+        Register department = registerRepository.findByDepartmentNameAndLocation(departmentName, location)
+                .orElseThrow(() -> new RuntimeException("Department not found"));
         if (department != null) {
             List<Project> projects = projectRepository.findByDepartment(department);
             return projects.stream()
-                           .map(this::convertToDTO) // Convert each Project to ProjectDTO
-                           .collect(Collectors.toList());
+                    .map(this::convertToDTO) // Convert each Project to ProjectDTO
+                    .collect(Collectors.toList());
         }
         return Collections.emptyList();
     }
 
-    private ProjectDTO convertToDTO(Project project) 
-    {
+    public List<ProjectDTO> getByLocation(String locationName) {
+        List<Project> projects = projectRepository.findByLocationName(locationName);
+        return projects.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    private ProjectDTO convertToDTO(Project project) {
         ProjectDTO dto = new ProjectDTO();
         dto.setId(project.getId());
         dto.setName(project.getName());
@@ -153,24 +149,22 @@ public class ProjectService {
         dto.setSiteEngineer(project.getSiteEngineer());
 
         // Set Project Manager if present
-    ProjectManager manager = project.getProjectManager();
-    if (manager != null) {
-        ProjectManagerResponseDTO managerDTO = new ProjectManagerResponseDTO();
-        managerDTO.setName(manager.getName());
-        managerDTO.setEmail(manager.getEmail());
-        dto.setProjectManager(managerDTO); // Set the ProjectManagerResponseDTO in ProjectDTO
-    }
+        ProjectManager manager = project.getProjectManager();
+        if (manager != null) {
+            ProjectManagerResponseDTO managerDTO = new ProjectManagerResponseDTO();
+            managerDTO.setName(manager.getName());
+            managerDTO.setEmail(manager.getEmail());
+            dto.setProjectManager(managerDTO); // Set the ProjectManagerResponseDTO in ProjectDTO
+        }
 
         return dto;
     }
 
-
-    public List<ProjectDTO> getManagerProjects(Long id)
-    {
+    public List<ProjectDTO> getManagerProjects(Long id) {
         List<Project> projects = projectRepository.findProjectManagerId(id);
         return projects.stream()
-                       .map(this::convertToDTO) // Convert each Project to ProjectDTO
-                       .collect(Collectors.toList());
+                .map(this::convertToDTO) // Convert each Project to ProjectDTO
+                .collect(Collectors.toList());
         // return projectRepository.findProjectManagerId(id);
     }
 }

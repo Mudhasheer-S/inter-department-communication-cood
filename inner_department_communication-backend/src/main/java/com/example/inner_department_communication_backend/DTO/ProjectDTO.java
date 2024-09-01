@@ -10,7 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProjectDTO {
-    
+
     private Long id;
     private String name;
     private String description;
@@ -24,5 +24,5 @@ public class ProjectDTO {
     private String departmentName;
     private String siteEngineer;
 
-    private ProjectManagerResponseDTO projectManager; 
+    private ProjectManagerResponseDTO projectManager;
 }

@@ -1,5 +1,8 @@
 package com.example.inner_department_communication_backend.controller;
 
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +31,7 @@ public class ProjectController {
             @PathVariable String departmentName,
             @PathVariable String departmentLocation,
             @RequestBody Project project) {
-        Project createdProject = projectService.createProject(project, departmentName,departmentLocation);
+        Project createdProject = projectService.createProject(project, departmentName, departmentLocation);
         if (createdProject != null) {
             return ResponseEntity.status(HttpStatus.CREATED).body("Posted Successfully");
         } else {
@@ -36,23 +39,37 @@ public class ProjectController {
         }
     }
 
- @GetMapping("get-project/by-department/{departmentName}/{location}")
+    @GetMapping("get-project/by-department/{departmentName}/{location}")
     public ResponseEntity<List<ProjectDTO>> getProjectsByDepartmentName(
-            @PathVariable String departmentName,@PathVariable String location) {
-        List<ProjectDTO> projectDTOs = projectService.getProjectsByDepartmentName(departmentName,location);
+            @PathVariable String departmentName, @PathVariable String location) {
+        List<ProjectDTO> projectDTOs = projectService.getProjectsByDepartmentName(departmentName, location);
         if (projectDTOs.isEmpty()) {
             return ResponseEntity.noContent().build(); // 204 No Content if no projects found
         }
         return ResponseEntity.ok(projectDTOs); // 200 OK with the list of ProjectDTOs
     }
 
+    @GetMapping("/getByLocation/{locationName}")
+    public ResponseEntity<List<ProjectDTO>> getByLocation(@PathVariable String locationName) {
+        List<ProjectDTO> projects = projectService.getByLocation(locationName);
+        if (projects == null) {
+            projects = new ArrayList<>();
+        }
+        if (projects.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(projects);
+    }
+
     @GetMapping("/intersecting-departments/{department}/{location}")
-    public List<ProjectDTO> getProjectsInLocationsWithMultipleDepartments(@PathVariable String department,@PathVariable String location) {
-        return projectService.getProjectsInLocationsWithMultipleDepartments(department,location);
+    public List<ProjectDTO> getProjectsInLocationsWithMultipleDepartments(@PathVariable String department,
+            @PathVariable String location) {
+        return projectService.getProjectsInLocationsWithMultipleDepartments(department, location);
     }
 
     @GetMapping("/getProjectsWithSameLocation/{id}")
     public List<ProjectDTO> getProjectsWithSameLocation(@PathVariable Long id) {
         return projectService.getProjectWithSameLocation(id);
     }
+
 }

@@ -15,14 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-
-
-
-
 @RestController
 @CrossOrigin("*")
 public class SiteEngineerController {
-    
+
     @Autowired
     private SiteEngineerService siteEngineerService;
 
@@ -40,10 +36,10 @@ public class SiteEngineerController {
     public List<SiteEngineer> getAllSiteEngineer() {
         return siteEngineerService.getAllEngineer();
     }
-    
+
     @PostMapping("/assign-exist-engineer/{email}/{id}")
-    public void postMethodName(@PathVariable String email,@PathVariable("id") Long project_id) {       
-        siteEngineerService.updateSiteEngineer(email,project_id);
+    public void postMethodName(@PathVariable String email, @PathVariable("id") Long project_id) {
+        siteEngineerService.updateSiteEngineer(email, project_id);
     }
-    
+
 }

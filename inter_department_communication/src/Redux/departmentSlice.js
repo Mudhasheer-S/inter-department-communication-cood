@@ -1,4 +1,3 @@
-// src/redux/departmentSlice.js
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
@@ -18,19 +17,29 @@ export const departmentSlice = createSlice({
     },
     setDepartmentName: (state, action) => {
       state.name = action.payload;
-      sessionStorage.setItem('departmentName', action.payload); 
+      sessionStorage.setItem('departmentName', action.payload);
     },
     setDepartmentLocation: (state, action) => {
       state.location = action.payload;
-      sessionStorage.setItem('departmentLocation', action.payload); 
+      sessionStorage.setItem('departmentLocation', action.payload);
     },
     setDepartmentRole: (state, action) => {
       state.role = action.payload;
-      sessionStorage.setItem('departmentRole', action.payload); 
-    }
+      sessionStorage.setItem('departmentRole', action.payload);
+    },
+    logout: (state) => {
+      state.id = '';
+      state.name = '';
+      state.location = '';
+      state.role = '';
+      sessionStorage.removeItem('departmentId');
+      sessionStorage.removeItem('departmentName');
+      sessionStorage.removeItem('departmentLocation');
+      sessionStorage.removeItem('departmentRole');
+    },
   },
 });
 
-export const { setDepartmentId , setDepartmentName, setDepartmentLocation, setDepartmentRole } = departmentSlice.actions;
+export const { setDepartmentId, setDepartmentName, setDepartmentLocation, setDepartmentRole, logout } = departmentSlice.actions;
 
 export default departmentSlice.reducer;

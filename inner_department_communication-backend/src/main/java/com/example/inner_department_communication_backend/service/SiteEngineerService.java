@@ -26,7 +26,7 @@ public class SiteEngineerService {
     }
 
     public List<Project> getProjectForSite(String email){
-        return projectRepository.findBySiteEngineer(email);
+        return projectRepository.findBySiteEngineerWithoutCompleted(email);
     }
 
     public void updateSiteEngineer(String email,Long id){

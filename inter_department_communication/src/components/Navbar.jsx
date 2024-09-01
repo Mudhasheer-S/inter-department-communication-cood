@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { IoLogOutOutline, IoNotifications } from "react-icons/io5";
 import { useSelector } from "react-redux";
+import { useDispatch } from 'react-redux';
+import { logout } from "../Redux/departmentSlice";
+// import { logout } from './redux/departmentSlice';
+
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,6 +13,8 @@ const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const departmentName = useSelector((state) => state.department.name);
   const location = useSelector((state) => state.department.location);
+  const dispatch = useDispatch();
+
 
   const navigate = useNavigate();
 
@@ -27,6 +33,7 @@ const Navbar = () => {
   const handleLogout = () => {
     // Perform logout logic here
     // e.g., clear tokens, update state, redirect to login page
+    dispatch(logout());
     console.log("User logged out");
     navigate("/"); // Redirect to login page
   };

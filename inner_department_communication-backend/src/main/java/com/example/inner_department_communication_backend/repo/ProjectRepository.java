@@ -63,4 +63,9 @@ public List<Object[]> getProjectWithSameLocation(Long id);
 
      List<Project> findBySiteEngineer(String siteEngineer);
 
+     @Query("SELECT p FROM Project p WHERE p.siteEngineer = ?1 AND p.status <> 'completed'")
+     List<Project> findBySiteEngineerWithoutCompleted(String siteEngineer);     
+
+
+
 }

@@ -99,12 +99,12 @@ const MyDepartment = () => {
     <>
     <Navbar />
     <div className="max-w-screen-xl mx-auto py-8 px-4">
-      <h1 className="text-4xl font-extrabold text-center mb-12 text-gray-600">{departmentName} Projects</h1>
+      <h1 className="text-4xl font-extrabold text-center mb-12 text-black">{departmentName} Projects</h1>
 
       <div className="flex justify-end mb-6">
         <button
           onClick={handlePostProjectClick}
-          className="bg-gray-500 text-white px-6 py-3 rounded-lg shadow-md hover:bg-gray-700 transition duration-300"
+          className="bg-black text-white px-6 py-3 rounded-lg shadow-md hover:bg-gray-700 transition duration-300"
         >
           Post Project
         </button>

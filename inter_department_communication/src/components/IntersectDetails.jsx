@@ -52,7 +52,7 @@ export default function IntersectDetails() {
     return (
         <>
             <Navbar />
-            <div className="flex justify-center items-center min-h-screen bg-gray-50 p-8">
+            <div className="flex justify-center items-center min-h-screen bg-gray-50 p-8 mt-3">
                 <div className="bg-white p-10 rounded-xl shadow-md w-full max-w-6xl">
                     <h1 className="text-3xl font-bold mb-6 text-gray-800 text-center">Intersect Details</h1>
                     {message && <p className="mb-8 text-xl font-semibold text-indigo-600 text-center">{message}</p>}

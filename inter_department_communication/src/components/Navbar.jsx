@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { IoLogOutOutline, IoNotifications } from "react-icons/io5";
 import { useSelector } from "react-redux";
-import { useDispatch } from 'react-redux';
+import { useDispatch } from "react-redux";
 import { logout } from "../Redux/departmentSlice";
 
 const Navbar = () => {
@@ -37,7 +37,9 @@ const Navbar = () => {
     <nav className="bg-white text-black p-4 shadow-md">
       <div className="container mx-auto flex justify-between items-center">
         <div className="text-2xl font-bold">
-          <h2>{location} - {departmentName}</h2>
+          <h2>
+            {location} - {departmentName}
+          </h2>
         </div>
         <button
           onClick={toggleMenu}
@@ -140,8 +142,8 @@ const Navbar = () => {
             </li>
           </ul>
           {showModal && (
-            <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
-              <div className="bg-white p-6 rounded shadow-lg">
+            <div className="modal-overlay">
+              <div className="modal-content">
                 <h2 className="text-black font-semibold mb-4">
                   Are you sure you want to logout?
                 </h2>

@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { IoLogOutOutline, IoNotifications } from "react-icons/io5";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from "react-redux";
 
 export default function ProjectManagerNavbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,7 +25,7 @@ export default function ProjectManagerNavbar() {
   };
 
   const handleLogout = () => {
-    dispatch({ type: 'LOGOUT' }); // Implement your logout logic here
+    dispatch({ type: "LOGOUT" }); // Implement your logout logic here
     console.log("User logged out");
     navigate("/project-manager-login"); // Redirect to login page
   };
@@ -56,7 +56,9 @@ export default function ProjectManagerNavbar() {
           </svg>
         </button>
         <div
-          className={`lg:flex lg:items-center lg:w-auto ${isOpen ? 'block' : 'hidden'}`}
+          className={`lg:flex lg:items-center lg:w-auto ${
+            isOpen ? "block" : "hidden"
+          }`}
         >
           <ul className="lg:flex">
             <li>
@@ -135,8 +137,8 @@ export default function ProjectManagerNavbar() {
             </li>
           </ul>
           {showModal && (
-            <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
-              <div className="bg-white p-6 rounded shadow-lg">
+            <div className="modal-overlay">
+              <div className="modal-content">
                 <h2 className="text-black font-semibold mb-4">
                   Are you sure you want to logout?
                 </h2>

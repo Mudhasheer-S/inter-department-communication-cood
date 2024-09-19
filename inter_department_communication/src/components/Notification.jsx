@@ -70,7 +70,7 @@ const NotificationsPage = () => {
   return (
     <>
     <Navbar />
-    <div className="p-10 bg-gray-50 min-h-screen">
+    <div className="p-10 bg-gray-50 min-h-screen mt-3">
       <div className="mb-6 flex space-x-6">
         {['projectAlerts', 'whatsNew', 'publicGrievance'].map((type) => (
           <button

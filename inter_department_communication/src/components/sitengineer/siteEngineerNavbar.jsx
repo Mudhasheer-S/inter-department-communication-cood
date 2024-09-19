@@ -36,7 +36,9 @@ export default function SiteEngineerNavbar() {
     <nav className="bg-white text-black p-4 shadow-md">
       <div className="container mx-auto flex justify-between items-center">
         <div className="text-2xl font-bold">
-          <h2>{location}Welcome, {siteEngineerName}!</h2>
+          <h2>
+            {location}Welcome, {siteEngineerName}!
+          </h2>
         </div>
         <button
           onClick={toggleMenu}
@@ -58,7 +60,9 @@ export default function SiteEngineerNavbar() {
           </svg>
         </button>
         <div
-          className={`lg:flex lg:items-center lg:w-auto ${isOpen ? "block" : "hidden"}`}
+          className={`lg:flex lg:items-center lg:w-auto ${
+            isOpen ? "block" : "hidden"
+          }`}
         >
           <ul className="lg:flex lg:space-x-4">
             <li>
@@ -127,7 +131,7 @@ export default function SiteEngineerNavbar() {
               </Link>
             </li>
             <li>
-            <button
+              <button
                 onClick={() => setShowModal(true)}
                 className="fixed bottom-4 right-4 bg-black text-white p-4 rounded-full shadow-lg hover:bg-gray-800"
                 title="Logout"
@@ -137,8 +141,8 @@ export default function SiteEngineerNavbar() {
             </li>
           </ul>
           {showModal && (
-            <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
-              <div className="bg-white p-6 rounded shadow-lg">
+            <div className="modal-overlay">
+              <div className="modal-content">
                 <h2 className="text-black font-semibold mb-4">
                   Are you sure you want to logout?
                 </h2>
@@ -150,7 +154,7 @@ export default function SiteEngineerNavbar() {
                 </button>
                 <button
                   onClick={() => setShowModal(false)}
-                  className="ml-4 bg-black text-white px-4 py-2 rounded hover:bg-gray-700"
+                  className="ml-4 bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700"
                 >
                   Cancel
                 </button>

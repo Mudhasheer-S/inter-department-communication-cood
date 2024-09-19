@@ -25,7 +25,7 @@ export default function Intersectdept() {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-gray-50 text-gray-900">
+      <div className="min-h-screen bg-gray-50 text-gray-900 mt-3">
         <div className="p-8 max-w-5xl mx-auto">
           {projects.length > 0 ? (
             projects.map((project, index) => (
